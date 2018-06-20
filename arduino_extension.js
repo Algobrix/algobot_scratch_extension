@@ -346,6 +346,10 @@
     if (notifyConnection) return true;
     return false;
   };
+  
+  ext.my_first_block = function() {
+        // Code that gets executed when the block is run
+    }; 
 
   ext.analogWrite = function(pin, val) {
     analogWrite(pin, val);
@@ -544,6 +548,7 @@
 
   var blocks = {
     en: [
+	  [' ', 'my first block', 'my_first_block'],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
       [' ', 'connect %m.hwIn to analog %n', 'connectHW', 'rotation knob', 0],
