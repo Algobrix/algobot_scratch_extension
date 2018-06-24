@@ -1106,6 +1106,6 @@
     url: 'https://algobrix.github.io/algobot_scratch_extension/'
   };
 
-  ScratchExtensions.register('Algobot', descriptor, ext, {type:'serial'});
+  ScratchExtensions.register('Arduino', descriptor, ext, {type:'serial'});
 
 })({});
