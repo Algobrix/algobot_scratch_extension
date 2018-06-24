@@ -347,7 +347,7 @@
     return false;
   };
   
-  ext.my_first_block = function() {
+  ext.my_first_block = function(pin, val) {
         // Code that gets executed when the block is run
 		analogWrite(pin, val);
     }; 
