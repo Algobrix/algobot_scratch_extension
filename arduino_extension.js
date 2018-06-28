@@ -346,32 +346,6 @@
     if (notifyConnection) return true;
     return false;
   };
-  
-<<<<<<< HEAD
-<<<<<<< HEAD
-  /*ext.move_motor = function(motor, power) {
-=======
-  ext.move_motor = function(motor, power) {
->>>>>>> parent of 944783d... Commented out block to try to debug
-	  if (motor === 'forward')
-	  {
-		  analogWrite(3, power);
-		  analogWrite(5, 0);
-	  }
-	  else
-	  {
-		  analogWrite(3, 0);
-		  analogWrite(5, power);
-	  }
-  }
-  
-  ext.my_first_block = function(pin, val) {
-=======
-  ext.my_first_block = function() {
->>>>>>> parent of d51f940... no variables were passed into function and neither pin nor val are global variables
-        // Code that gets executed when the block is run
-		analogWrite(pin, val);
-    }; 
 
   ext.analogWrite = function(pin, val) {
     analogWrite(pin, val);
@@ -570,8 +544,6 @@
 
   var blocks = {
     en: [
-	  [' ', 'move motor %m.motorDirection at %n power', 'move_motor', 'forward', 0],
-	  [' ', 'my first block', 'my_first_block'],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
       [' ', 'connect %m.hwIn to analog %n', 'connectHW', 'rotation knob', 0],
@@ -981,7 +953,6 @@
 
   var menus = {
     en: {
-	  motorDirection ['forward', 'backward'],	
       buttons: ['button A', 'button B', 'button C', 'button D'],
       btnStates: ['pressed', 'released'],
       hwIn: ['rotation knob', 'light sensor', 'temperature sensor'],
@@ -1126,9 +1097,9 @@
   var descriptor = {
     blocks: blocks[lang],
     menus: menus[lang],
-    url: 'https://algobrix.github.io/algobot_scratch_extension/'
+    url: 'http://khanning.github.io/scratch-arduino-extension'
   };
 
-  ScratchExtensions.register('Algobot', descriptor, ext, {type:'serial'});
+  ScratchExtensions.register('Arduino', descriptor, ext, {type:'serial'});
 
 })({});
