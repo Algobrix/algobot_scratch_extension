@@ -342,6 +342,19 @@
     device.send(msg.buffer);
   }
 
+  ext.move_motor = function(motor, power) {
+	  if (motor === 'forward')
+	  {
+		  analogWrite(3, power);
+		  analogWrite(5, 0);
+	  }
+	  else
+	  {
+		  analogWrite(3, 0);
+		  analogWrite(5, power);
+	  }
+  }
+  
   ext.whenConnected = function() {
     if (notifyConnection) return true;
     return false;
@@ -544,6 +557,7 @@
 
   var blocks = {
     en: [
+	  [' ', 'move motor %m.motorDirection at %n power', 'move_motor', 'forward', 0],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
       [' ', 'connect %m.hwIn to analog %n', 'connectHW', 'rotation knob', 0],
@@ -953,6 +967,7 @@
 
   var menus = {
     en: {
+	  motorDirection: ['forward', 'backward'],
       buttons: ['button A', 'button B', 'button C', 'button D'],
       btnStates: ['pressed', 'released'],
       hwIn: ['rotation knob', 'light sensor', 'temperature sensor'],
