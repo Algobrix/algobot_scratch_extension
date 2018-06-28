@@ -347,6 +347,7 @@
     return false;
   };
   
+<<<<<<< HEAD
   /*ext.move_motor = function(motor, power) {
 	  if (motor === 'forward')
 	  {
@@ -361,6 +362,9 @@
   } */
   
   ext.my_first_block = function(pin, val) {
+=======
+  ext.my_first_block = function() {
+>>>>>>> parent of d51f940... no variables were passed into function and neither pin nor val are global variables
         // Code that gets executed when the block is run
 		analogWrite(pin, val);
     }; 
