@@ -342,16 +342,42 @@
     device.send(msg.buffer);
   }
 
-  ext.move_motor = function(motor, power) {
-	  if (motor === 'forward')
+  ext.move_motor = function(motor, direction, power) {
+	  if (direction === 'forward')
 	  {
-		  analogWrite(3, power);
-		  analogWrite(5, 0);
+		  if (motor === 'motor A')
+		  {
+			analogWrite(3, power);
+			analogWrite(5, 0);
+		  }
+		  else if (motor === 'motor B')
+		  {
+			analogWrite(6, power);
+			analogWrite(9, 0);
+		  }
+		  else
+		  {
+			analogWrite(10, power);
+			analogWrite(11, 0);
+		  }
 	  }
 	  else
 	  {
-		  analogWrite(3, 0);
-		  analogWrite(5, power);
+		  if (motor === 'motor A')
+		  {
+			analogWrite(3, 0);
+			analogWrite(5, power);
+		  }
+		  else if (motor === 'motor B')
+		  {
+			analogWrite(6, 0);
+			analogWrite(9, power);
+		  }
+		  else
+		  {
+			analogWrite(10, 0);
+			analogWrite(11, power);
+		  }
 	  }
   }
   
@@ -557,7 +583,7 @@
 
   var blocks = {
     en: [
-	  [' ', 'move motor %m.motorDirection at %n power', 'move_motor', 'forward', 0],
+	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'forward', 0],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
       [' ', 'connect %m.hwIn to analog %n', 'connectHW', 'rotation knob', 0],
@@ -967,6 +993,7 @@
 
   var menus = {
     en: {
+	  motorSelection: ['motor A', 'motor B', 'motor C'],
 	  motorDirection: ['forward', 'backward'],
       buttons: ['button A', 'button B', 'button C', 'button D'],
       btnStates: ['pressed', 'released'],
