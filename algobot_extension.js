@@ -343,7 +343,7 @@
   }
 
   ext.move_motor = function(motor, direction, power) {
-	  if (direction === 'forward')
+	  if (direction === 'clockwise')
 	  {
 		  if (motor === 'motor A')
 		  {
@@ -361,7 +361,7 @@
 			analogWrite(11, 0);
 		  }
 	  }
-	  else
+	  else if (direction === 'counterclockwise')
 	  {
 		  if (motor === 'motor A')
 		  {
@@ -379,6 +379,15 @@
 			analogWrite(11, power);
 		  }
 	  }
+	  else
+	  {
+		  analogWrite(3, 0);
+		  analogWrite(5, 0);
+		  analogWrite(6, 0);
+		  analogWrite(9, 0);
+		  analogWrite(10, 0);
+		  analogWrite(11, 0);
+		  
   }
   
   ext.whenConnected = function() {
@@ -583,7 +592,8 @@
 
   var blocks = {
     en: [
-	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'forward', 0],
+	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
+	  ['-'],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
       [' ', 'connect %m.hwIn to analog %n', 'connectHW', 'rotation knob', 0],
@@ -994,7 +1004,7 @@
   var menus = {
     en: {
 	  motorSelection: ['motor A', 'motor B', 'motor C'],
-	  motorDirection: ['forward', 'backward'],
+	  motorDirection: ['clockwise', 'counterclockwise', 'stop'],
       buttons: ['button A', 'button B', 'button C', 'button D'],
       btnStates: ['pressed', 'released'],
       hwIn: ['rotation knob', 'light sensor', 'temperature sensor'],
