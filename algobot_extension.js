@@ -342,21 +342,42 @@
     device.send(msg.buffer);
   }
 
-
   ext.move_motor = function(motor, direction, power) {
 	  if (direction === 'clockwise')
-
-  ext.move_motor = function(motor, power) {
-	  if (motor === 'forward')
-
 	  {
-		  analogWrite(3, power);
-		  analogWrite(5, 0);
+		  if (motor === 'motor A')
+		  {
+			analogWrite(3, power);
+			analogWrite(5, 0);
+		  }
+		  else if (motor === 'motor B')
+		  {
+			analogWrite(6, power);
+			analogWrite(9, 0);
+		  }
+		  else
+		  {
+			analogWrite(10, power);
+			analogWrite(11, 0);
+		  }
 	  }
 	  else if (direction === 'counterclockwise')
 	  {
-		  analogWrite(3, 0);
-		  analogWrite(5, power);
+		  if (motor === 'motor A')
+		  {
+			analogWrite(3, 0);
+			analogWrite(5, power);
+		  }
+		  else if (motor === 'motor B')
+		  {
+			analogWrite(6, 0);
+			analogWrite(9, power);
+		  }
+		  else
+		  {
+			analogWrite(10, 0);
+			analogWrite(11, power);
+		  }
 	  }
 	  else
 	  {
@@ -366,7 +387,7 @@
 		  analogWrite(9, 0);
 		  analogWrite(10, 0);
 		  analogWrite(11, 0);
-		  
+	  }  
   }
   
   ext.whenConnected = function() {
@@ -571,9 +592,7 @@
 
   var blocks = {
     en: [
-
 	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
-	  [' ', 'move motor %m.motorDirection at %n power', 'move_motor', 'forward', 0],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
       [' ', 'connect %m.hwIn to analog %n', 'connectHW', 'rotation knob', 0],
