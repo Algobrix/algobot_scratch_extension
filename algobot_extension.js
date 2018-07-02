@@ -342,42 +342,21 @@
     device.send(msg.buffer);
   }
 
+<<<<<<< HEAD
   ext.move_motor = function(motor, direction, power) {
 	  if (direction === 'clockwise')
+=======
+  ext.move_motor = function(motor, power) {
+	  if (motor === 'forward')
+>>>>>>> parent of 85ad467... Added motor preferences to move motor block
 	  {
-		  if (motor === 'motor A')
-		  {
-			analogWrite(3, power);
-			analogWrite(5, 0);
-		  }
-		  else if (motor === 'motor B')
-		  {
-			analogWrite(6, power);
-			analogWrite(9, 0);
-		  }
-		  else
-		  {
-			analogWrite(10, power);
-			analogWrite(11, 0);
-		  }
+		  analogWrite(3, power);
+		  analogWrite(5, 0);
 	  }
 	  else if (direction === 'counterclockwise')
 	  {
-		  if (motor === 'motor A')
-		  {
-			analogWrite(3, 0);
-			analogWrite(5, power);
-		  }
-		  else if (motor === 'motor B')
-		  {
-			analogWrite(6, 0);
-			analogWrite(9, power);
-		  }
-		  else
-		  {
-			analogWrite(10, 0);
-			analogWrite(11, power);
-		  }
+		  analogWrite(3, 0);
+		  analogWrite(5, power);
 	  }
 	  else
 	  {
@@ -387,7 +366,7 @@
 		  analogWrite(9, 0);
 		  analogWrite(10, 0);
 		  analogWrite(11, 0);
-	  }  
+		  
   }
   
   ext.whenConnected = function() {
@@ -592,7 +571,11 @@
 
   var blocks = {
     en: [
+<<<<<<< HEAD
 	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
+=======
+	  [' ', 'move motor %m.motorDirection at %n power', 'move_motor', 'forward', 0],
+>>>>>>> parent of 85ad467... Added motor preferences to move motor block
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
       [' ', 'connect %m.hwIn to analog %n', 'connectHW', 'rotation knob', 0],
@@ -1002,8 +985,12 @@
 
   var menus = {
     en: {
+<<<<<<< HEAD
 	  motorSelection: ['motor A', 'motor B', 'motor C'],
 	  motorDirection: ['clockwise', 'counterclockwise', 'stop'],
+=======
+	  motorDirection: ['forward', 'backward'],
+>>>>>>> parent of 85ad467... Added motor preferences to move motor block
       buttons: ['button A', 'button B', 'button C', 'button D'],
       btnStates: ['pressed', 'released'],
       hwIn: ['rotation knob', 'light sensor', 'temperature sensor'],
