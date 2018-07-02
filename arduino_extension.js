@@ -342,9 +342,10 @@
     device.send(msg.buffer);
   }
 
-  ext.move_motor = function(motor_direction, speed)
+  ext.move_motor = function(motor_choice, motor_direction, speed)
   {
-	  //if (motor_choice === 'motor A')
+	  if (motor_choice === 'motor A')
+	  {
 		  if (motor_direction === 'clockwise')
 		  {
 			  analogWrite(3, speed);
@@ -355,7 +356,8 @@
 			  analogWrite(3, 0);
 			  analogWrite(5, speed);
 		  }
-	  /*else if (motor_choice === 'motor B')
+	  }
+	  else if (motor_choice === 'motor B')
 	  {
 		  if (motor_direction === 'clockwise')
 		  {
@@ -380,7 +382,7 @@
 			  analogWrite(10, 0);
 			  analogWrite(11, speed);
 		  }
-	  }*/
+	  }
   }
 	  
   
@@ -586,7 +588,7 @@
 
   var blocks = {
     en: [
-	  [' ', 'move motor %m.motorDirection at %n power', 'move_motor', 'clockwise', 0],
+	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
       [' ', 'connect %m.hwIn to analog %n', 'connectHW', 'rotation knob', 0],
@@ -996,7 +998,7 @@
 
   var menus = {
     en: {
-	  //motorSelection: ['motor A', 'motor B', 'motor C'],
+	  motorSelection: ['motor A', 'motor B', 'motor C'],
 	  motorDirection: ['clockwise', 'counterclockwise'],
       buttons: ['button A', 'button B', 'button C', 'button D'],
       btnStates: ['pressed', 'released'],
