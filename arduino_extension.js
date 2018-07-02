@@ -342,7 +342,7 @@
     device.send(msg.buffer);
   }
 
-  ext.move_motor = function(motor_choice, motor_direction, speed)
+  ext.move_motor = function(motor_direction, speed)
   {
 	  //if (motor_choice === 'motor A')
 		  if (motor_direction === 'clockwise')
@@ -380,7 +380,7 @@
 			  analogWrite(10, 0);
 			  analogWrite(11, speed);
 		  }
-	  } */
+	  }*/
   }
 	  
   
