@@ -610,7 +610,7 @@
     if (pair.length > 1 && pair[0]=='lang')
       lang = pair[1];
   }
-
+  
   var blocks = {
     en: [
 	  [' ', 'move robot %m.robotDirection', 'move_robot', 'forward'],
