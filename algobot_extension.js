@@ -344,6 +344,7 @@
   
   ext.move_robot = function(robot_direction)
   {
+	  digitalWrite(13, HIGH);
 	  if (robot_direction === 'forward')
 	  {
 		  analogWrite(5, 0);
