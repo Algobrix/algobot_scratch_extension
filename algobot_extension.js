@@ -389,6 +389,7 @@
 	  //motor A: pin 5 and 6
 	  //motor B: pin 2 and 3
 	  //motor C: pin 9 and 10
+	  //C isn't used for motor tests
 	  if (motor_choice === 'motor A')
 	  {
 		  if (motor_direction === 'clockwise')
