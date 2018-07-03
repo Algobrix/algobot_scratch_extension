@@ -341,28 +341,23 @@
         deg >> 0x07]);
     device.send(msg.buffer);
   }
-
+  
   ext.move_robot = function(robot_direction)
   {
-	  //will move robot forward 1 space
 	  if (robot_direction === 'forward')
 	  {
-		  //represents motor A
 		  analogWrite(3, 127);
 		  analogWrite(5, 0);
-		  //represents motor B
 		  analogWrite(6, 127);
 		  analogWrite(9, 0);
 	  }
-	  //will move robot backward 1 space
 	  else if (robot_direction === 'backward')
 	  {
 		  analogWrite(3, 0);
 		  analogWrite(5, 127);
-		  analogWrite(6. 0);
+		  analogWrite(6, 0);
 		  analogWrite(9, 127);
 	  }
-	  //will turn the robot left by 90 degrees
 	  else if (robot_direction === 'left')
 	  {
 		  analogWrite(3, 0);
@@ -370,7 +365,6 @@
 		  analogWrite(6, 127);
 		  analogWrite(9, 0);
 	  }
-	  //will turn the robot right by 90 degrees
 	  else
 	  {
 		  analogWrite(3, 127);
@@ -378,47 +372,11 @@
 		  analogWrite(6, 0);
 		  analogWrite(9, 127);
 	  }
-	  //neither the left or right options move the robot a space, they only make the robot turn
-  }
+  };
   
-  ext.move_motor = function(motor, direction, power) {
-	  if (direction === 'clockwise')
-	  {
-		  if (motor === 'motor A')
-		  {
-			analogWrite(3, power);
-			analogWrite(5, 0);
-		  }
-		  else if (motor === 'motor B')
-		  {
-			analogWrite(6, power);
-			analogWrite(9, 0);
-		  }
-		  else
-		  {
-			analogWrite(10, power);
-			analogWrite(11, 0);
-		  }
-	  }
-	  else if (direction === 'counterclockwise')
-	  {
-		  if (motor === 'motor A')
-		  {
-			analogWrite(3, 0);
-			analogWrite(5, power);
-		  }
-		  else if (motor === 'motor B')
-		  {
-			analogWrite(6, 0);
-			analogWrite(9, power);
-		  }
-		  else
-		  {
-			analogWrite(10, 0);
-			analogWrite(11, power);
-		  }
-	  }
-	  else
+  ext.move_motor = function(motor_choice, motor_direction, speed)
+  {
+	  if (motor_direction === 'stop')
 	  {
 		  analogWrite(3, 0);
 		  analogWrite(5, 0);
@@ -426,8 +384,51 @@
 		  analogWrite(9, 0);
 		  analogWrite(10, 0);
 		  analogWrite(11, 0);
-	  }  
-  }
+	  }
+	  //motor A: pin 3 and 5
+	  //motor B: pin 6 and 9
+	  //motor C: pin 10 and 11
+	  if (motor_choice === 'motor A')
+	  {
+		  if (motor_direction === 'clockwise')
+		  {
+			  analogWrite(3, speed);
+			  analogWrite(5, 0);
+		  }
+		  else if (motor_direction === 'counterclockwise')
+		  {
+			  analogWrite(3, 0);
+			  analogWrite(5, speed);
+		  }
+	  }
+	  else if (motor_choice === 'motor B')
+	  {
+		  if (motor_direction === 'clockwise')
+		  {
+			  analogWrite(6, speed);
+			  analogWrite(9, 0);
+		  }
+		  else if (motor_direction === 'counterclockwise')
+		  {
+			  analogWrite(6, 0);
+			  analogWrite(9, speed);
+		  }
+	  }
+	  else if (motor_choice === 'motor C')
+	  {
+		  if (motor_direction === 'clockwise')
+		  {
+			  analogWrite(10, speed);
+			  analogWrite(11, 0);
+		  }
+		  else if (motor_direction === 'counterclockwise')
+		  {
+			  analogWrite(10, 0);
+			  analogWrite(11, speed);
+		  }
+	  }
+  };
+	  
   
   ext.whenConnected = function() {
     if (notifyConnection) return true;
@@ -477,25 +478,6 @@
 
   ext.connectHW = function(hw, pin) {
     hwList.add(hw, pin);
-  };
-
-  ext.rotateServo = function(servo, deg) {
-    var hw = hwList.search(servo);
-    if (!hw) return;
-    if (deg < 0) deg = 0;
-    else if (deg > 180) deg = 180;
-    rotateServo(hw.pin, deg);
-    hw.val = deg;
-  };
-
-  ext.changeServo = function(servo, change) {
-    var hw = hwList.search(servo);
-    if (!hw) return;
-    var deg = hw.val + change;
-    if (deg < 0) deg = 0;
-    else if (deg > 180) deg = 180;
-    rotateServo(hw.pin, deg);
-    hw.val = deg;
   };
 
   ext.setLED = function(led, val) {
@@ -628,7 +610,7 @@
     if (pair.length > 1 && pair[0]=='lang')
       lang = pair[1];
   }
-
+  
   var blocks = {
     en: [
 	  [' ', 'move robot %m.robotDirection', 'move_robot', 'forward'],
@@ -640,9 +622,6 @@
       [' ', 'set %m.leds %m.outputs', 'digitalLED', 'led A', 'on'],
       [' ', 'set %m.leds brightness to %n%', 'setLED', 'led A', 100],
       [' ', 'change %m.leds brightness by %n%', 'changeLED', 'led A', 20],
-      ['-'],
-      [' ', 'rotate %m.servos to %n degrees', 'rotateServo', 'servo A', 180],
-      [' ', 'rotate %m.servos by %n degrees', 'changeServo', 'servo A', 20],
       ['-'],
       ['h', 'when %m.buttons is %m.btnStates', 'whenButton', 'button A', 'pressed'],
       ['b', '%m.buttons pressed?', 'isButtonPressed', 'button A'],
@@ -1052,7 +1031,6 @@
       leds: ['led A', 'led B', 'led C', 'led D'],
       outputs: ['on', 'off'],
       ops: ['>', '=', '<'],
-      servos: ['servo A', 'servo B', 'servo C', 'servo D']
     },
     de: {
       buttons: ['Taste A', 'Taste B', 'Taste C', 'Taste D'],
