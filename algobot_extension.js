@@ -342,6 +342,45 @@
     device.send(msg.buffer);
   }
 
+  ext.move_robot = function(robot_direction)
+  {
+	  //will move robot forward 1 space
+	  if (robot_direction === 'forward')
+	  {
+		  //represents motor A
+		  analogWrite(3, 127);
+		  analogWrite(5, 0);
+		  //represents motor B
+		  analogWrite(6, 127);
+		  analogWrite(9, 0);
+	  }
+	  //will move robot backward 1 space
+	  else if (robot_direction === 'backward')
+	  {
+		  analogWrite(3, 0);
+		  analogWrite(5, 127);
+		  analogWrite(6. 0);
+		  analogWrite(9, 127);
+	  }
+	  //will turn the robot left by 90 degrees
+	  else if (robot_direction === 'left')
+	  {
+		  analogWrite(3, 0);
+		  analogWrite(5, 127);
+		  analogWrite(6, 127);
+		  analogWrite(9, 0);
+	  }
+	  //will turn the robot right by 90 degrees
+	  else
+	  {
+		  analogWrite(3, 127);
+		  analogWrite(5, 0);
+		  analogWrite(6, 0);
+		  analogWrite(9, 127);
+	  }
+	  //neither the left or right options move the robot a space, they only make the robot turn
+  }
+  
   ext.move_motor = function(motor, direction, power) {
 	  if (direction === 'clockwise')
 	  {
@@ -592,6 +631,7 @@
 
   var blocks = {
     en: [
+	  [' ', 'move robot %m.robotDirection', 'move_robot', 'forward'],
 	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
@@ -1002,6 +1042,7 @@
 
   var menus = {
     en: {
+	  robotDirection: ['forward', 'backward', 'left', 'right'],
 	  motorSelection: ['motor A', 'motor B', 'motor C'],
 	  motorDirection: ['clockwise', 'counterclockwise', 'stop'],
       buttons: ['button A', 'button B', 'button C', 'button D'],
