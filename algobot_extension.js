@@ -376,7 +376,7 @@
   
   ext.move_motor = function(motor_choice, motor_direction, speed)
   {
-	  ditigalWrite(13, HIGH);
+	  digitalWrite(13, HIGH);
 	  if (motor_direction === 'stop')
 	  {
 		  analogWrite(5, 0);
