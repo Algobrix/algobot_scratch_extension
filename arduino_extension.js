@@ -342,6 +342,38 @@
     device.send(msg.buffer);
   }
   
+  ext.move_robot = function(robot_direction)
+  {
+	  if (robot_direction === 'forward')
+	  {
+		  analogWrite(3, 127);
+		  analogWrite(5, 0);
+		  analogWrite(6, 127);
+		  analogWrite(9, 0);
+	  }
+	  else if (robot_direction === 'backward')
+	  {
+		  analogWrite(3, 0);
+		  analogWrite(5, 127);
+		  analogWrite(6, 0);
+		  analogWrite(9, 127);
+	  }
+	  else if (robot_direction === 'left')
+	  {
+		  analogWrite(3, 0);
+		  analogWrite(5, 127);
+		  analogWrite(6, 127);
+		  analogWrite(9, 0);
+	  }
+	  else
+	  {
+		  analogWrite(3, 127);
+		  analogWrite(5, 0);
+		  analogWrite(6, 0);
+		  analogWrite(9, 127);
+	  }
+  }
+  
   ext.move_motor = function(motor_choice, motor_direction, speed)
   {
 	  //motor A: pin 3 and 5
@@ -591,6 +623,7 @@
 
   var blocks = {
     en: [
+	  [' ', 'move robot %m.robotDirection', 'move_robot', 'forward'],
 	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
@@ -1001,6 +1034,7 @@
 
   var menus = {
     en: {
+	  robotDirection: ['forward', 'backward', 'left', 'right'],
 	  motorSelection: ['motor A', 'motor B', 'motor C'],
 	  motorDirection: ['clockwise', 'counterclockwise'],
       buttons: ['button A', 'button B', 'button C', 'button D'],
