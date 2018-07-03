@@ -393,12 +393,12 @@
 	  //C isn't used for motor tests
 	  if (motor_choice === 'motor A')
 	  {
-		  if (motor_direction === 'clockwise')
+		  if (motor_direction === 'counterclockwise')
 		  {
 			  analogWrite(5, 0);
 			  analogWrite(6, speed);
 		  }
-		  else if (motor_direction === 'counterclockwise')
+		  else if (motor_direction === 'clockwise')
 		  {
 			  analogWrite(6, 0);
 			  analogWrite(5, speed);
@@ -406,12 +406,12 @@
 	  }
 	  else if (motor_choice === 'motor B')
 	  {
-		  if (motor_direction === 'clockwise')
+		  if (motor_direction === 'counterclockwise')
 		  {
 			  analogWrite(2, 0);
 			  analogWrite(3, speed);
 		  }
-		  else if (motor_direction === 'counterclockwise')
+		  else if (motor_direction === 'clockwise')
 		  {
 			  analogWrite(3, 0);
 			  analogWrite(2, speed);
@@ -419,12 +419,12 @@
 	  }
 	  else if (motor_choice === 'motor C')
 	  {
-		  if (motor_direction === 'clockwise')
+		  if (motor_direction === 'counterclockwise')
 		  {
 			  analogWrite(9, 0);
 			  analogWrite(10, speed);
 		  }
-		  else if (motor_direction === 'counterclockwise')
+		  else if (motor_direction === 'clockwise')
 		  {
 			  analogWrite(10, 0);
 			  analogWrite(9, speed);
