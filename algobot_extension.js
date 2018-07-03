@@ -398,8 +398,8 @@
 		  }
 		  else if (motor_direction === 'counterclockwise')
 		  {
-			  analogWrite(6, 0);
-			  analogWrite(7, speed);
+			  analogWrite(5, 0);
+			  analogWrite(6, speed);
 		  }
 	  }
 	  else if (motor_choice === 'motor B')
