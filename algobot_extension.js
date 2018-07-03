@@ -346,7 +346,7 @@
   {
 	  if (robot_direction === 'forward')
 	  {
-		  analogWrite(7, 0);
+		  analogWrite(6, 0);
 		  analogWrite(3, 0);
 		  analogWrite(5, 127);
 		  analogWrite(2, 127);
@@ -355,19 +355,19 @@
 	  {
 		  analogWrite(5, 0);
 		  analogWrite(2, 0);
-		  analogWrite(7, 127);
+		  analogWrite(6, 127);
 		  analogWrite(3, 127);
 	  }
 	  else if (robot_direction === 'left')
 	  {
 		  analogWrite(5, 0);
 		  analogWrite(3, 0);
-		  analogWrite(7, 127);
+		  analogWrite(6, 127);
 		  analogWrite(2, 127);
 	  }
 	  else
 	  {
-		  analogWrite(7, 0);
+		  analogWrite(6, 0);
 		  analogWrite(2, 0);
 		  analogWrite(5, 127);
 		  analogWrite(3, 127);
@@ -380,25 +380,25 @@
 	  if (motor_direction === 'stop')
 	  {
 		  analogWrite(5, 0);
-		  analogWrite(7, 0);
+		  analogWrite(6, 0);
 		  analogWrite(2, 0);
 		  analogWrite(3, 0);
 		  analogWrite(9, 0);
 		  analogWrite(10, 0);
 	  }
-	  //motor A: pin 5 and 7
+	  //motor A: pin 5 and 6
 	  //motor B: pin 2 and 3
 	  //motor C: pin 9 and 10
 	  if (motor_choice === 'motor A')
 	  {
 		  if (motor_direction === 'clockwise')
 		  {
-			  analogWrite(7, 0);
+			  analogWrite(6, 0);
 			  analogWrite(5, speed);
 		  }
 		  else if (motor_direction === 'counterclockwise')
 		  {
-			  analogWrite(5, 0);
+			  analogWrite(6, 0);
 			  analogWrite(7, speed);
 		  }
 	  }
