@@ -372,7 +372,7 @@
 		  analogWrite(6, 0);
 		  analogWrite(9, 127);
 	  }
-  }
+  };
   
   ext.move_motor = function(motor_choice, motor_direction, speed)
   {
@@ -418,7 +418,7 @@
 			  analogWrite(11, speed);
 		  }
 	  }
-  }
+  };
 	  
   
   ext.whenConnected = function() {
