@@ -376,6 +376,15 @@
   
   ext.move_motor = function(motor_choice, motor_direction, speed)
   {
+	  if (motor_direction === 'stop')
+	  {
+		  analogWrite(3, 0);
+		  analogWrite(5, 0);
+		  analogWrite(6, 0);
+		  analogWrite(9, 0);
+		  analogWrite(10, 0);
+		  analogWrite(11, 0);
+	  }
 	  //motor A: pin 3 and 5
 	  //motor B: pin 6 and 9
 	  //motor C: pin 10 and 11
@@ -1036,7 +1045,7 @@
     en: {
 	  robotDirection: ['forward', 'backward', 'left', 'right'],
 	  motorSelection: ['motor A', 'motor B', 'motor C'],
-	  motorDirection: ['clockwise', 'counterclockwise'],
+	  motorDirection: ['clockwise', 'counterclockwise', 'stop'],
       buttons: ['button A', 'button B', 'button C', 'button D'],
       btnStates: ['pressed', 'released'],
       hwIn: ['rotation knob', 'light sensor', 'temperature sensor'],
