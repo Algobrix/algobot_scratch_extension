@@ -391,13 +391,13 @@
 	  {
 		  if (motor_direction === 'clockwise')
 		  {
-			  analogWrite(7, 0);
+			  analogWrite(6, 0);
 			  analogWrite(5, speed);
 		  }
 		  else if (motor_direction === 'counterclockwise')
 		  {
 			  analogWrite(5, 0);
-			  analogWrite(7, speed);
+			  analogWrite(6, speed);
 		  }
 	  }
 	  else if (motor_choice === 'motor B')
