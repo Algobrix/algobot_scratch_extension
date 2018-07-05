@@ -375,16 +375,22 @@
   
   ext.move_motor = function(motor_choice, motor_direction, speed)
   {
+	  pinMode(2, OUTPUT);
+	  pinMode(3, OUTPUT);
+	  pinMode(5, OUTPUT);
+	  pinMode(6, OUTPUT);
+	  pinMode(9, OUTPUT);
+	  pinMode(10, OUTPUT);
 	  if (motor_direction === 'stop')
 	  {
 		  analogWrite(5, 0);
-		  analogWrite(7, 0);
+		  analogWrite(6, 0);
 		  analogWrite(2, 0);
 		  analogWrite(3, 0);
 		  analogWrite(9, 0);
 		  analogWrite(10, 0);
 	  }
-	  //motor A: pin 5 and 7
+	  //motor A: pin 5 and 6
 	  //motor B: pin 2 and 3
 	  //motor C: pin 9 and 10
 	  if (motor_choice === 'motor A')
