@@ -360,8 +360,8 @@
 		  */
 		  analogWrite(3, 0);
 		  analogWrite(5, 0);
-		  analogWrite(7, 127);
-		  analogWrite(2, 127);
+		  analogWrite(8, 127);
+		  analogWrite(4, 127);
 	  }
 	  else if (robot_direction === 'left')
 	  {
