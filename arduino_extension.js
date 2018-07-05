@@ -1167,7 +1167,7 @@
   var descriptor = {
     blocks: blocks[lang],
     menus: menus[lang],
-    url: 'http://khanning.github.io/scratch-arduino-extension'
+    url: 'http://algobrix.github.io/algobot_scratch_extension/ardino_extension.js'
   };
 
   ScratchExtensions.register('Arduino', descriptor, ext, {type:'serial'});
