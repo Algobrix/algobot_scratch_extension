@@ -345,31 +345,31 @@
   {
 	  if (robot_direction === 'forward')
 	  {
-		  analogWrite(5, 0);
-		  analogWrite(9, 0);
-		  analogWrite(3, 127);
-		  analogWrite(6, 127);
+		  analogWrite(7, 0);
+		  analogWrite(3, 0);
+		  analogWrite(5, 127);
+		  analogWrite(2, 127);
 	  }
 	  else if (robot_direction === 'backward')
 	  {
-		  analogWrite(3, 0);
-		  analogWrite(6, 0);
-		  analogWrite(5, 127);
-		  analogWrite(9, 127);
+		  analogWrite(5, 0);
+		  analogWrite(2, 0);
+		  analogWrite(7, 127);
+		  analogWrite(3, 127);
 	  }
 	  else if (robot_direction === 'left')
 	  {
+		  analogWrite(5, 0);
 		  analogWrite(3, 0);
-		  analogWrite(9, 0);
-		  analogWrite(5, 127);
-		  analogWrite(6, 127);
+		  analogWrite(7, 127);
+		  analogWrite(2, 127);
 	  }
 	  else
 	  {
-		  analogWrite(5, 0);
-		  analogWrite(6, 0);
-		  analogWrite(9, 127);
+		  analogWrite(7, 0);
+		  analogWrite(2, 0);
 		  analogWrite(3, 127);
+		  analogWrite(5, 127);
 	  }
   };
   
