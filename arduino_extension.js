@@ -375,6 +375,8 @@
   
   ext.move_motor = function(motor_choice, motor_direction, speed)
   {
+	  pinMode(13, OUTPUT);
+	  digitalWrite(13, HIGH);
 	  pinMode(2, OUTPUT);
 	  pinMode(3, OUTPUT);
 	  pinMode(5, OUTPUT);
