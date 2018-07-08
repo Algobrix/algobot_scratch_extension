@@ -343,6 +343,14 @@
   
   ext.move_robot = function(robot_direction)
   {
+	  pinMode(13, OUTPUT);
+	  digitalWrite(13, HIGH);
+	  pinMode(2, OUTPUT);
+	  pinMode(3, OUTPUT);
+	  pinMode(5, OUTPUT);
+	  pinMode(6, OUTPUT);
+	  pinMode(9, OUTPUT);
+	  pinMode(10, OUTPUT);
 	  if (robot_direction === 'forward')
 	  {
 		  analogWrite(6, 0);
