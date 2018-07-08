@@ -301,8 +301,7 @@
       return;
     }
     if (val < 0) val = 0;
-    else if (val > 100) val = 100;
-    val = Math.round((val / 100) * 255);
+    else if (val > 255) val = 255;
     pinMode(pin, PWM);
     var msg = new Uint8Array([
         ANALOG_MESSAGE | (pin & 0x0F),
@@ -344,87 +343,103 @@
   
   ext.move_robot = function(robot_direction)
   {
+	  pinMode(13, OUTPUT);
+	  digitalWrite(13, HIGH);
+	  pinMode(2, OUTPUT);
+	  pinMode(3, OUTPUT);
+	  pinMode(5, OUTPUT);
+	  pinMode(6, OUTPUT);
+	  pinMode(9, OUTPUT);
+	  pinMode(10, OUTPUT);
 	  if (robot_direction === 'forward')
 	  {
+		  analogWrite(6, 0);
+		  analogWrite(2, 0);
 		  analogWrite(3, 127);
-		  analogWrite(5, 0);
-		  analogWrite(6, 127);
-		  analogWrite(9, 0);
+		  analogWrite(5, 127);
 	  }
 	  else if (robot_direction === 'backward')
 	  {
+		  analogWrite(5, 0);
 		  analogWrite(3, 0);
-		  analogWrite(5, 127);
-		  analogWrite(6, 0);
-		  analogWrite(9, 127);
+		  analogWrite(6, 127);
+		  analogWrite(2, 127);
 	  }
 	  else if (robot_direction === 'left')
 	  {
+		  analogWrite(6, 0);
 		  analogWrite(3, 0);
 		  analogWrite(5, 127);
-		  analogWrite(6, 127);
-		  analogWrite(9, 0);
+		  analogWrite(2, 127);
 	  }
 	  else
 	  {
-		  analogWrite(3, 127);
 		  analogWrite(5, 0);
-		  analogWrite(6, 0);
-		  analogWrite(9, 127);
+		  analogWrite(2, 0);
+		  analogWrite(6, 127);
+		  analogWrite(3, 127);
 	  }
   };
   
   ext.move_motor = function(motor_choice, motor_direction, speed)
   {
+	  pinMode(13, OUTPUT);
+	  digitalWrite(13, HIGH);
+	  pinMode(2, OUTPUT);
+	  pinMode(3, OUTPUT);
+	  pinMode(5, OUTPUT);
+	  pinMode(6, OUTPUT);
+	  pinMode(9, OUTPUT);
+	  pinMode(10, OUTPUT);
 	  if (motor_direction === 'stop')
 	  {
-		  analogWrite(3, 0);
 		  analogWrite(5, 0);
 		  analogWrite(6, 0);
+		  analogWrite(2, 0);
+		  analogWrite(3, 0);
 		  analogWrite(9, 0);
 		  analogWrite(10, 0);
-		  analogWrite(11, 0);
 	  }
-	  //motor A: pin 3 and 5
-	  //motor B: pin 6 and 9
-	  //motor C: pin 10 and 11
+	  //motor A: pin 5 and 6
+	  //motor B: pin 2 and 3
+	  //motor C: pin 9 and 10
 	  if (motor_choice === 'motor A')
 	  {
 		  if (motor_direction === 'clockwise')
 		  {
-			  analogWrite(3, speed);
-			  analogWrite(5, 0);
+			  analogWrite(6, 0);
+			  analogWrite(5, speed);
 		  }
 		  else if (motor_direction === 'counterclockwise')
 		  {
-			  analogWrite(3, 0);
-			  analogWrite(5, speed);
+			  analogWrite(5, 0);
+			  analogWrite(6, speed);
 		  }
 	  }
 	  else if (motor_choice === 'motor B')
 	  {
 		  if (motor_direction === 'clockwise')
 		  {
-			  analogWrite(6, speed);
-			  analogWrite(9, 0);
+			  analogWrite(3, 0);
+			  analogWrite(2, speed);
 		  }
 		  else if (motor_direction === 'counterclockwise')
 		  {
-			  analogWrite(6, 0);
-			  analogWrite(9, speed);
+			  analogWrite(2, 0);
+			  analogWrite(3, speed);
 		  }
 	  }
 	  else if (motor_choice === 'motor C')
 	  {
 		  if (motor_direction === 'clockwise')
 		  {
-			  analogWrite(10, speed);
-			  analogWrite(11, 0);
+			  analogWrite(10, 0);
+			  analogWrite(9, speed);
 		  }
 		  else if (motor_direction === 'counterclockwise')
 		  {
-			  analogWrite(10, 0);
-			  analogWrite(11, speed);
+			  analogWrite(9, 0);
+			  analogWrite(10, speed);
 		  }
 	  }
   };
@@ -1167,9 +1182,9 @@
   var descriptor = {
     blocks: blocks[lang],
     menus: menus[lang],
-    url: 'http://algobrix.github.io/algobot_scratch_extension/algobot_extension.js'
+    url: 'http://algobrix.github.io/algobot_scratch_extension/ardino_extension.js'
   };
 
-  ScratchExtensions.register('Algobot', descriptor, ext, {type:'serial'});
+  ScratchExtensions.register('Arduino', descriptor, ext, {type:'serial'});
 
 })({});
