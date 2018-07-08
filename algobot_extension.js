@@ -1182,9 +1182,9 @@
   var descriptor = {
     blocks: blocks[lang],
     menus: menus[lang],
-    url: 'http://algobrix.github.io/algobot_scratch_extension/ardino_extension.js'
+    url: 'http://algobrix.github.io/algobot_scratch_extension/algobot_extension.js'
   };
 
-  ScratchExtensions.register('Arduino', descriptor, ext, {type:'serial'});
+  ScratchExtensions.register('Algobot', descriptor, ext, {type:'serial'});
 
 })({});
