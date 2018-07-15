@@ -341,7 +341,7 @@
     device.send(msg.buffer);
   }
   
-  ext.move_robot = function(robot_direction, robot_steps, num_steps)
+  ext.move_robot = function(robot_direction, num_steps)
   {
 	  pinMode(13, OUTPUT);
 	  digitalWrite(13, HIGH);
@@ -704,7 +704,7 @@
   
   var blocks = {
     en: [
-	  [' ', 'move robot %m.robotDirection %m.robotSteps %numberSteps', 'move_robot', 'forward', '1'],
+	  [' ', 'move robot %m.robotDirection %m.robotSteps', 'move_robot', 'forward', '1'],
 	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
@@ -1073,7 +1073,7 @@
 
   var menus = {
     en: {
-	  numberSteps: ['1', '2'],
+	  robotSteps: ['1', '2'],
 	  robotDirection: ['forward', 'backward', 'left', 'right', 'stop'],
 	  motorSelection: ['motor A', 'motor B', 'motor C'],
 	  motorDirection: ['clockwise', 'counterclockwise', 'stop'],
