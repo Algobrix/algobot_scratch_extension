@@ -372,12 +372,19 @@
 		  analogWrite(5, 127);
 		  analogWrite(2, 127);
 	  }
-	  else
+	  else if (robot_direction === 'right')
 	  {
 		  analogWrite(5, 0);
 		  analogWrite(2, 0);
 		  analogWrite(6, 127);
 		  analogWrite(3, 127);
+	  }
+	  else
+	  {
+		  analogWrite(5, 0);
+		  analogWrite(2, 0);
+		  analogWrite(6, 0);
+		  analogWrite(3, 0);
 	  }
   };
   
@@ -1036,7 +1043,7 @@
 
   var menus = {
     en: {
-	  robotDirection: ['forward', 'backward', 'left', 'right'],
+	  robotDirection: ['forward', 'backward', 'left', 'right', 'stop'],
 	  motorSelection: ['motor A', 'motor B', 'motor C'],
 	  motorDirection: ['clockwise', 'counterclockwise', 'stop'],
       buttons: ['button A', 'button B', 'button C', 'button D'],
