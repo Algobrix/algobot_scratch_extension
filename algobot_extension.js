@@ -369,9 +369,9 @@
 		  }
 		  else if (robot_direction === 'backward')
 		  {
-			  analogWrite(5, 0);
+			  analogWrite(6, 0);
 			  analogWrite(3, 0);
-			  analogWrite(6, 127);
+			  analogWrite(5, 127);
 			  analogWrite(2, 127);
 			  setTimeout(function()
 			  {
@@ -383,10 +383,10 @@
 		  }
 		  else if (robot_direction === 'left')
 		  {
-			  analogWrite(6, 0);
-			  analogWrite(3, 0);
-			  analogWrite(5, 127);
-			  analogWrite(2, 127);
+			  analogWrite(5, 0);
+			  analogWrite(2, 0);
+			  analogWrite(6, 127);
+			  analogWrite(3, 127);
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
@@ -397,10 +397,10 @@
 		  }
 		  else if (robot_direction === 'right')
 		  {
-			  analogWrite(5, 0);
-			  analogWrite(2, 0);
-			  analogWrite(6, 127);
-			  analogWrite(3, 127);
+			  analogWrite(6, 0);
+			  analogWrite(3, 0);
+			  analogWrite(5, 127);
+			  analogWrite(2, 127);
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
@@ -436,9 +436,9 @@
 		  else if (robot_direction === 'backward')
 		  {
 			  analogWrite(5, 0);
-			  analogWrite(3, 0);
+			  analogWrite(2, 0);
 			  analogWrite(6, 127);
-			  analogWrite(2, 127);
+			  analogWrite(3, 127);
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
