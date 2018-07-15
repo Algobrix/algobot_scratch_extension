@@ -359,6 +359,12 @@
 			  analogWrite(2, 0);
 			  analogWrite(3, 127);
 			  analogWrite(5, 127);
+			  wait = 1500;
+			  window.setTimeout(function() {callback();}, wait);
+			  analogWrite(5, 0);
+			  analogWrite(6, 0);
+			  analogWrite(2, 0);
+			  analogWrite(3, 0);
 		  }
 		  else if (robot_direction === 'backward')
 		  {
@@ -366,6 +372,12 @@
 			  analogWrite(3, 0);
 			  analogWrite(6, 127);
 			  analogWrite(2, 127);
+			  wait = 1500;
+			  window.setTimeout(function() {callback();}, wait);
+			  analogWrite(5, 0);
+			  analogWrite(6, 0);
+			  analogWrite(2, 0);
+			  analogWrite(3, 0);
 		  }
 		  else if (robot_direction === 'left')
 		  {
@@ -388,11 +400,6 @@
 			  analogWrite(2, 0);
 			  analogWrite(3, 0);
 		  }
-		  window.setTimeout(function() {callback();}, 1500);
-		  analogWrite(5, 0);
-		  analogWrite(6, 0);
-		  analogWrite(2, 0);
-		  analogWrite(3, 0);
 	  }
 	  else
 	  {
@@ -402,6 +409,12 @@
 			  analogWrite(2, 0);
 			  analogWrite(3, 127);
 			  analogWrite(5, 127);
+			  wait = 3000;
+			  window.setTimeout(function() {callback();}, wait);
+			  analogWrite(5, 0);
+			  analogWrite(6, 0);
+			  analogWrite(2, 0);
+			  analogWrite(3, 0);
 		  }
 		  else if (robot_direction === 'backward')
 		  {
@@ -409,6 +422,12 @@
 			  analogWrite(3, 0);
 			  analogWrite(6, 127);
 			  analogWrite(2, 127);
+			  wait = 3000;
+			  window.setTimeout(function() {callback();}, wait);
+			  analogWrite(5, 0);
+			  analogWrite(6, 0);
+			  analogWrite(2, 0);
+			  analogWrite(3, 0);
 		  }
 		  else if (robot_direction === 'left')
 		  {
@@ -686,7 +705,7 @@
   
   var blocks = {
     en: [
-	  ['w', 'move robot %m.robotDirection %m.robotSteps steps', 'move_robot', 'forward', '1'],
+	  ['w', 'move robot %m.robotDirection %m.robotSteps %m.waitTime', 'move_robot', 'forward', '1'],
 	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
