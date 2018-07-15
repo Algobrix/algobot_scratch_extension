@@ -706,7 +706,7 @@
   
   var blocks = {
     en: [
-	  ['w', 'move robot %m.robotDirection %m.robotSteps %numberSteps', 'move_robot', 'forward', '1'],
+	  [' ', 'move robot %m.robotDirection %m.robotSteps %numberSteps', 'move_robot', 'forward', '1'],
 	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
