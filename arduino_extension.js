@@ -341,7 +341,7 @@
     device.send(msg.buffer);
   }
   
-  ext.move_robot = function(robot_direction)
+  ext.move_robot = function(robot_direction, num_steps)
   {
 	  pinMode(13, OUTPUT);
 	  digitalWrite(13, HIGH);
@@ -351,40 +351,109 @@
 	  pinMode(6, OUTPUT);
 	  pinMode(9, OUTPUT);
 	  pinMode(10, OUTPUT);
-	  if (robot_direction === 'forward')
+	  if (num_steps === '1')
 	  {
-		  analogWrite(6, 0);
-		  analogWrite(2, 0);
-		  analogWrite(3, 127);
-		  analogWrite(5, 127);
-	  }
-	  else if (robot_direction === 'backward')
-	  {
-		  analogWrite(5, 0);
-		  analogWrite(3, 0);
-		  analogWrite(6, 127);
-		  analogWrite(2, 127);
-	  }
-	  else if (robot_direction === 'left')
-	  {
-		  analogWrite(6, 0);
-		  analogWrite(3, 0);
-		  analogWrite(5, 127);
-		  analogWrite(2, 127);
-	  }
-	  else if (robot_direction === 'right')
-	  {
-		  analogWrite(5, 0);
-		  analogWrite(2, 0);
-		  analogWrite(6, 127);
-		  analogWrite(3, 127);
+		  if (robot_direction === 'forward')
+		  {
+			  analogWrite(6, 0);
+			  analogWrite(2, 0);
+			  analogWrite(3, 127);
+			  analogWrite(5, 127);
+			  setTimeout(function()
+			  {
+				  analogWrite(5, 0);
+				  analogWrite(6, 0);
+				  analogWrite(2, 0);
+				  analogWrite(3, 0);
+			  }, 1500);
+		  }
+		  else if (robot_direction === 'backward')
+		  {
+			  analogWrite(5, 0);
+			  analogWrite(3, 0);
+			  analogWrite(6, 127);
+			  analogWrite(2, 127);
+			  setTimeout(function()
+			  {
+				  analogWrite(5, 0);
+				  analogWrite(6, 0);
+				  analogWrite(2, 0);
+				  analogWrite(3, 0);
+			  }, 1500);
+		  }
+		  else if (robot_direction === 'left')
+		  {
+			  analogWrite(6, 0);
+			  analogWrite(3, 0);
+			  analogWrite(5, 127);
+			  analogWrite(2, 127);
+		  }
+		  else if (robot_direction === 'right')
+		  {
+			  analogWrite(5, 0);
+			  analogWrite(2, 0);
+			  analogWrite(6, 127);
+			  analogWrite(3, 127);
+		  }
+		  else
+		  {
+			  analogWrite(5, 0);
+			  analogWrite(6, 0);
+			  analogWrite(2, 0);
+			  analogWrite(3, 0);
+		  }
 	  }
 	  else
 	  {
-		  analogWrite(5, 0);
-		  analogWrite(2, 0);
-		  analogWrite(6, 0);
-		  analogWrite(3, 0);
+		  if (robot_direction === 'forward')
+		  {
+			  analogWrite(6, 0);
+			  analogWrite(2, 0);
+			  analogWrite(3, 127);
+			  analogWrite(5, 127);
+			  setTimeout(function()
+			  {
+				  analogWrite(5, 0);
+				  analogWrite(6, 0);
+				  analogWrite(2, 0);
+				  analogWrite(3, 0);
+			  }, 3000);
+		  }
+		  else if (robot_direction === 'backward')
+		  {
+			  analogWrite(5, 0);
+			  analogWrite(3, 0);
+			  analogWrite(6, 127);
+			  analogWrite(2, 127);
+			  setTimeout(function()
+			  {
+				  analogWrite(5, 0);
+				  analogWrite(6, 0);
+				  analogWrite(2, 0);
+				  analogWrite(3, 0);
+			  }, 3000);
+		  }
+		  else if (robot_direction === 'left')
+		  {
+			  analogWrite(6, 0);
+			  analogWrite(3, 0);
+			  analogWrite(5, 127);
+			  analogWrite(2, 127);
+		  }
+		  else if (robot_direction === 'right')
+		  {
+			  analogWrite(5, 0);
+			  analogWrite(2, 0);
+			  analogWrite(6, 127);
+			  analogWrite(3, 127);
+		  }
+		  else
+		  {
+			  analogWrite(5, 0);
+			  analogWrite(6, 0);
+			  analogWrite(2, 0);
+			  analogWrite(3, 0);
+		  }
 	  }
   };
   
@@ -635,7 +704,7 @@
   
   var blocks = {
     en: [
-	  [' ', 'move robot %m.robotDirection', 'move_robot', 'forward'],
+	  [' ', 'move robot %m.robotDirection %m.robotSteps', 'move_robot', 'forward', '1'],
 	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
@@ -1043,6 +1112,7 @@
 
   var menus = {
     en: {
+	  robotSteps: ['1', '2'],
 	  robotDirection: ['forward', 'backward', 'left', 'right', 'stop'],
 	  motorSelection: ['motor A', 'motor B', 'motor C'],
 	  motorDirection: ['clockwise', 'counterclockwise', 'stop'],
