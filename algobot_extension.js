@@ -351,8 +351,6 @@
 	  pinMode(6, OUTPUT);
 	  pinMode(9, OUTPUT);
 	  pinMode(10, OUTPUT);
-      if (robot_steps === '1')
-	  {
 		  if (robot_direction === 'forward')
 		  {
 			  analogWrite(6, 0);
@@ -400,62 +398,6 @@
 			  analogWrite(2, 0);
 			  analogWrite(3, 0);
 		  }
-	  }
-	  else
-	  {
-		  if (robot_direction === 'forward')
-		  {
-			  analogWrite(6, 0);
-			  analogWrite(2, 0);
-			  analogWrite(3, 127);
-			  analogWrite(5, 127);
-			  wait = 3000;
-			  window.setTimeout(function() {callback();}, wait);
-			  analogWrite(5, 0);
-			  analogWrite(6, 0);
-			  analogWrite(2, 0);
-			  analogWrite(3, 0);
-		  }
-		  else if (robot_direction === 'backward')
-		  {
-			  analogWrite(5, 0);
-			  analogWrite(3, 0);
-			  analogWrite(6, 127);
-			  analogWrite(2, 127);
-			  wait = 3000;
-			  window.setTimeout(function() {callback();}, wait);
-			  analogWrite(5, 0);
-			  analogWrite(6, 0);
-			  analogWrite(2, 0);
-			  analogWrite(3, 0);
-		  }
-		  else if (robot_direction === 'left')
-		  {
-			  analogWrite(6, 0);
-			  analogWrite(3, 0);
-			  analogWrite(5, 127);
-			  analogWrite(2, 127);
-		  }
-		  else if (robot_direction === 'right')
-		  {
-			  analogWrite(5, 0);
-			  analogWrite(2, 0);
-			  analogWrite(6, 127);
-			  analogWrite(3, 127);
-		  }
-		  else
-		  {
-			  analogWrite(5, 0);
-			  analogWrite(6, 0);
-			  analogWrite(2, 0);
-			  analogWrite(3, 0);
-		  }
-		  window.setTimeout(function() {callback();}, 3000);
-		  analogWrite(5, 0);
-		  analogWrite(6, 0);
-		  analogWrite(2, 0);
-		  analogWrite(3, 0);
-	  }
   };
   
   ext.move_motor = function(motor_choice, motor_direction, speed)
