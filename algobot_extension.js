@@ -355,10 +355,10 @@
 	  {
 		  if (robot_direction === 'forward')
 		  {
-			  analogWrite(6, 0);
+			  analogWrite(5, 0);
 			  analogWrite(2, 0);
 			  analogWrite(3, 127);
-			  analogWrite(5, 127);
+			  analogWrite(6, 127);
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
@@ -407,10 +407,10 @@
 	  {
 		  if (robot_direction === 'forward')
 		  {
-			  analogWrite(6, 0);
+			  analogWrite(5, 0);
 			  analogWrite(2, 0);
 			  analogWrite(3, 127);
-			  analogWrite(5, 127);
+			  analogWrite(6, 127);
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
