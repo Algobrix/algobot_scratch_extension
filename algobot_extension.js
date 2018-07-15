@@ -357,12 +357,13 @@
 			  analogWrite(2, 0);
 			  analogWrite(3, 127);
 			  analogWrite(5, 127);
-			  wait = 1500;
-			  window.setTimeout(function() {callback();}, wait);
-			  analogWrite(5, 0);
-			  analogWrite(6, 0);
-			  analogWrite(2, 0);
-			  analogWrite(3, 0);
+			  window.setTimeout(function()
+			  {
+				  analogWrite(5, 0);
+				  analogWrite(6, 0);
+				  analogWrite(2, 0);
+				  analogWrite(3, 0);
+			  }, 1500);
 		  }
 		  else if (robot_direction === 'backward')
 		  {
@@ -371,11 +372,13 @@
 			  analogWrite(6, 127);
 			  analogWrite(2, 127);
 			  wait = 1500;
-			  window.setTimeout(function() {callback();}, wait);
-			  analogWrite(5, 0);
-			  analogWrite(6, 0);
-			  analogWrite(2, 0);
-			  analogWrite(3, 0);
+			  window.setTimeout(function()
+			  {
+				  analogWrite(5, 0);
+				  analogWrite(6, 0);
+				  analogWrite(2, 0);
+				  analogWrite(3, 0);
+			  }, 1500);
 		  }
 		  else if (robot_direction === 'left')
 		  {
