@@ -1088,7 +1088,7 @@
   var menus = {
     en: {
 	  robotSteps: ['1', '2'],
-	  robotDirection: ['forward', 'backward', 'left', 'right', 'stop'],
+	  robotDirection: ['forward', 'backward', 'left', 'right'],
 	  motorSelection: ['motor A', 'motor B', 'motor C'],
 	  motorDirection: ['clockwise', 'counterclockwise', 'stop'],
       buttons: ['button A', 'button B', 'button C', 'button D'],
