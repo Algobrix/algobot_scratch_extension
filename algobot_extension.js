@@ -358,126 +358,94 @@
 	  {
 		  if (robot_direction === 'forward')
 		  {
-			  analogWrite(5, 0);
-			  analogWrite(2, 0);
-			  analogWrite(3, 127);
-			  analogWrite(6, 127);
-			  waitTime = waitTime + 1500;
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
-				  analogWrite(6, 0);
 				  analogWrite(2, 0);
-				  analogWrite(3, 0);
+				  analogWrite(3, 127);
+				  analogWrite(6, 127);
 			  }, waitTime);
+			  waitTime = waitTime + 1500;
 		  }
 		  else if (robot_direction === 'backward')
 		  {
-			  analogWrite(6, 0);
-			  analogWrite(3, 0);
-			  analogWrite(5, 127);
-			  analogWrite(2, 127);
-			  waitTime = waitTime + 1500;
 			  setTimeout(function()
 			  {
-				  analogWrite(5, 0);
-				  analogWrite(6, 0);
-				  analogWrite(2, 0);
 				  analogWrite(3, 0);
+				  analogWrite(6, 0);
+				  analogWrite(2, 127);
+				  analogWrite(5, 127);
 			  }, waitTime);
+			  waitTime = waitTime + 1500;
 		  }
 		  else if (robot_direction === 'left')
 		  {
-			  analogWrite(6, 0);
-			  analogWrite(2, 0);
-			  analogWrite(5, 85);
-			  analogWrite(3, 85);
-			  waitTime = waitTime + 2300;
 			  setTimeout(function()
 			  {
-				  analogWrite(5, 0);
-				  analogWrite(6, 0);
 				  analogWrite(2, 0);
-				  analogWrite(3, 0);
+				  analogWrite(6, 0);
+				  analogWrite(5, 85);
+				  analogWrite(3, 85);
 			  }, 2300);
+			  waitTime = waitTime + 2300;
 		  }
 		  else if (robot_direction === 'right')
 		  {
-			  analogWrite(5, 0);
-			  analogWrite(3, 0);
-			  analogWrite(6, 85);
-			  analogWrite(2, 85);
-			  waitTime = waitTime + 2300;
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
-				  analogWrite(6, 0);
-				  analogWrite(2, 0);
 				  analogWrite(3, 0);
+				  analogWrite(2, 85);
+				  analogWrite(6, 85);
 			  }, waitTime);
+			  waitTime = waitTime + 2300;
 		  }
 	  }
 	  else
 	  {
 		  if (robot_direction === 'forward')
 		  {
-			  analogWrite(5, 0);
-			  analogWrite(2, 0);
-			  analogWrite(3, 127);
-			  analogWrite(6, 127);
-			  waitTime = waitTime + 3000;
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
-				  analogWrite(6, 0);
 				  analogWrite(2, 0);
-				  analogWrite(3, 0);
+				  analogWrite(3, 127);
+				  analogWrite(6, 127);
 			  }, waitTime);
+			  waitTime = waitTime + 3000;
 		  }
 		  else if (robot_direction === 'backward')
 		  {
-			  analogWrite(6, 0);
-			  analogWrite(3, 0);
-			  analogWrite(5, 127);
-			  analogWrite(2, 127);
-			  waitTime = waitTime + 3000;
 			  setTimeout(function()
 			  {
-				  analogWrite(5, 0);
-				  analogWrite(6, 0);
-				  analogWrite(2, 0);
 				  analogWrite(3, 0);
+				  analogWrite(6, 0);
+				  analogWrite(2, 127);
+				  analogWrite(5, 127);
 			  }, waitTime);
+			  waitTime = waitTime + 3000;
 		  }
 		  else if (robot_direction === 'left')
 		  {
-			  analogWrite(6, 0);
-			  analogWrite(2, 0);
-			  analogWrite(5, 85);
-			  analogWrite(3, 85);
-			  waitTime = waitTime + 2300;
 			  setTimeout(function()
 			  {
-				  analogWrite(5, 0);
-				  analogWrite(6, 0);
 				  analogWrite(2, 0);
-				  analogWrite(3, 0);
-			  }, waitTime);
+				  analogWrite(6, 0);
+				  analogWrite(5, 85);
+				  analogWrite(3, 85);
+			  }, 2300);
+			  waitTime = waitTime + 2300;
 		  }
 		  else if (robot_direction === 'right')
 		  {
-			  analogWrite(5, 0);
-			  analogWrite(3, 0);
-			  analogWrite(6, 85);
-			  analogWrite(2, 85);
-			  waitTime = waitTime + 2300;
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
-				  analogWrite(6, 0);
-				  analogWrite(2, 0);
 				  analogWrite(3, 0);
+				  analogWrite(2, 85);
+				  analogWrite(6, 85);
 			  }, waitTime);
+			  waitTime = waitTime + 2300;
 		  }
 	  }
   };
