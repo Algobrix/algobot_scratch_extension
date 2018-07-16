@@ -385,8 +385,8 @@
 		  {
 			  analogWrite(6, 0);
 			  analogWrite(2, 0);
-			  analogWrite(5, 127);
-			  analogWrite(3, 127);
+			  analogWrite(5, 85);
+			  analogWrite(3, 85);
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
@@ -399,8 +399,8 @@
 		  {
 			  analogWrite(5, 0);
 			  analogWrite(3, 0);
-			  analogWrite(6, 127);
-			  analogWrite(2, 127);
+			  analogWrite(6, 85);
+			  analogWrite(2, 85);
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
@@ -408,13 +408,6 @@
 				  analogWrite(2, 0);
 				  analogWrite(3, 0);
 			  }, 2300);
-		  }
-		  else
-		  {
-			  analogWrite(5, 0);
-			  analogWrite(6, 0);
-			  analogWrite(2, 0);
-			  analogWrite(3, 0);
 		  }
 	  }
 	  else
@@ -451,8 +444,8 @@
 		  {
 			  analogWrite(6, 0);
 			  analogWrite(2, 0);
-			  analogWrite(5, 127);
-			  analogWrite(3, 127);
+			  analogWrite(5, 85);
+			  analogWrite(3, 85);
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
@@ -465,8 +458,8 @@
 		  {
 			  analogWrite(5, 0);
 			  analogWrite(3, 0);
-			  analogWrite(6, 127);
-			  analogWrite(2, 127);
+			  analogWrite(6, 85);
+			  analogWrite(2, 85);
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
@@ -474,13 +467,6 @@
 				  analogWrite(2, 0);
 				  analogWrite(3, 0);
 			  }, 2300);
-		  }
-		  else
-		  {
-			  analogWrite(5, 0);
-			  analogWrite(6, 0);
-			  analogWrite(2, 0);
-			  analogWrite(3, 0);
 		  }
 	  }
   };
