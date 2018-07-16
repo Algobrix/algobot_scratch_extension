@@ -68,6 +68,9 @@
   var majorVersion = 0,
     minorVersion = 0;
 	
+  //add waitTime variable so move robot commands do not overlap
+  var waitTime = 0;
+	
   var connected = false;
   var notifyConnection = false;
   var device = null;
@@ -343,8 +346,6 @@
   
   ext.move_robot = function(robot_direction, num_steps)
   {
-	  //add waitTime variable so move robot commands do not overlap
-	  var waitTime = 0;
 	  pinMode(13, OUTPUT);
 	  digitalWrite(13, HIGH);
 	  pinMode(2, OUTPUT);
@@ -353,7 +354,7 @@
 	  pinMode(6, OUTPUT);
 	  pinMode(9, OUTPUT);
 	  pinMode(10, OUTPUT);
-	  if (num_steps === '1')
+	  /*if (num_steps === '1')
 	  {
 		  if (robot_direction === 'forward')
 		  {
@@ -466,7 +467,66 @@
 				  analogWrite(3, 0);
 			  }, waitTime);
 		  }
+	  }*/
+	  while (robot_direction !== 'stop')
+	  {
+		  setTimeout(function()
+		  {
+			  if (robot_direction === 'forward')
+			  {
+				  analogWrite(2, 0);
+				  analogWrite(5, 0);
+				  analogWrite(3, 127);
+				  analogWrite(6, 127);
+				  if (num_steps === '1')
+				  {
+					  waitTime = waitTime + 1500;
+				  }
+				  else
+				  {
+					  waitTime = waitTime + 3000;
+				  }
+			  }
+			  else if (robot_direction === 'backward')
+			  {
+				  analogWrite(3, 0);
+				  analogWrite(6, 0);
+				  analogWrite(2, 127);
+				  analogWrite(5, 127);
+				  if (num_steps === '1')
+				  {
+					  waitTime = waitTime + 1500;
+				  }
+				  else
+				  {
+					  waitTime = waitTime + 3000;
+				  }
+			  }
+			  else if (robot_direction === 'left')
+			  {
+				  analogWrite(2, 0);
+				  analogWrite(6, 0);
+				  analogWrite(3, 85);
+				  analogWrite(5, 85);
+				  waitTime = waitTime + 2300;
+			  }
+			  else if (robot_direction === 'right')
+			  {
+				  analogWrite(3, 0);
+				  analogWrite(5, 0);
+				  analogWrite(2, 85);
+				  analogWrite(6, 85);
+				  waitTime = waitTime + 2300;
+			  }
+		  }, waitTime);
 	  }
+	  setTimeout(function()
+	  {
+		  analogWrite(2, 0);
+		  analogWrite(5, 0);
+		  analogWrite(3, 0);
+		  analogWrite(6, 0);
+	  }, waitTime);
   };
   
   ext.move_motor = function(motor_choice, motor_direction, speed)
