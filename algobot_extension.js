@@ -400,6 +400,16 @@
 			  }, waitTime);
 			  waitTime = waitTime + 2300;
 		  }
+		  else
+		  {
+			  setTimeout(function()
+			  {
+				  analogWrite(5, 0);
+				  analogWrite(6, 0);
+				  analogWrite(2, 0);
+				  analogWrite(3, 0);
+			  }, waitTime);
+		  }
 	  }
 	  else
 	  {
@@ -446,6 +456,16 @@
 				  analogWrite(6, 85);
 			  }, waitTime);
 			  waitTime = waitTime + 2300;
+		  }
+		  else
+		  {
+			  setTimeout(function()
+			  {
+				  analogWrite(5, 0);
+				  analogWrite(6, 0);
+				  analogWrite(2, 0);
+				  analogWrite(3, 0);
+			  }, waitTime);
 		  }
 	  }
   };
