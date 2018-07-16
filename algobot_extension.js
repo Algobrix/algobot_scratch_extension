@@ -68,6 +68,9 @@
   var majorVersion = 0,
     minorVersion = 0;
 
+  //add waitTime variable so move robot commands do not overlap
+  var waitTime = 0;
+	
   var connected = false;
   var notifyConnection = false;
   var device = null;
@@ -359,13 +362,14 @@
 			  analogWrite(2, 0);
 			  analogWrite(3, 127);
 			  analogWrite(6, 127);
+			  waitTime = waitTime + 1500;
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
 				  analogWrite(6, 0);
 				  analogWrite(2, 0);
 				  analogWrite(3, 0);
-			  }, 1500);
+			  }, waitTime);
 		  }
 		  else if (robot_direction === 'backward')
 		  {
@@ -373,13 +377,14 @@
 			  analogWrite(3, 0);
 			  analogWrite(5, 127);
 			  analogWrite(2, 127);
+			  waitTime = waitTime + 1500;
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
 				  analogWrite(6, 0);
 				  analogWrite(2, 0);
 				  analogWrite(3, 0);
-			  }, 1500);
+			  }, waitTime);
 		  }
 		  else if (robot_direction === 'left')
 		  {
@@ -387,6 +392,7 @@
 			  analogWrite(2, 0);
 			  analogWrite(5, 85);
 			  analogWrite(3, 85);
+			  waitTime = waitTime + 2300;
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
@@ -401,13 +407,14 @@
 			  analogWrite(3, 0);
 			  analogWrite(6, 85);
 			  analogWrite(2, 85);
+			  waitTime = waitTime + 2300;
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
 				  analogWrite(6, 0);
 				  analogWrite(2, 0);
 				  analogWrite(3, 0);
-			  }, 2300);
+			  }, waitTime);
 		  }
 	  }
 	  else
@@ -418,13 +425,14 @@
 			  analogWrite(2, 0);
 			  analogWrite(3, 127);
 			  analogWrite(6, 127);
+			  waitTime = waitTime + 3000;
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
 				  analogWrite(6, 0);
 				  analogWrite(2, 0);
 				  analogWrite(3, 0);
-			  }, 3000);
+			  }, waitTime);
 		  }
 		  else if (robot_direction === 'backward')
 		  {
@@ -432,13 +440,14 @@
 			  analogWrite(3, 0);
 			  analogWrite(5, 127);
 			  analogWrite(2, 127);
+			  waitTime = waitTime + 3000;
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
 				  analogWrite(6, 0);
 				  analogWrite(2, 0);
 				  analogWrite(3, 0);
-			  }, 3000);
+			  }, waitTime);
 		  }
 		  else if (robot_direction === 'left')
 		  {
@@ -446,13 +455,14 @@
 			  analogWrite(2, 0);
 			  analogWrite(5, 85);
 			  analogWrite(3, 85);
+			  waitTime = waitTime + 2300;
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
 				  analogWrite(6, 0);
 				  analogWrite(2, 0);
 				  analogWrite(3, 0);
-			  }, 2300);
+			  }, waitTime);
 		  }
 		  else if (robot_direction === 'right')
 		  {
@@ -460,13 +470,14 @@
 			  analogWrite(3, 0);
 			  analogWrite(6, 85);
 			  analogWrite(2, 85);
+			  waitTime = waitTime + 2300;
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
 				  analogWrite(6, 0);
 				  analogWrite(2, 0);
 				  analogWrite(3, 0);
-			  }, 2300);
+			  }, waitTime);
 		  }
 	  }
   };
