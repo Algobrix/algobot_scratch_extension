@@ -67,9 +67,6 @@
 
   var majorVersion = 0,
     minorVersion = 0;
-
-  //add waitTime variable so move robot commands do not overlap
-  var waitTime = 0;
 	
   var connected = false;
   var notifyConnection = false;
@@ -346,6 +343,8 @@
   
   ext.move_robot = function(robot_direction, num_steps)
   {
+	  //add waitTime variable so move robot commands do not overlap
+	  var waitTime = 0;
 	  pinMode(13, OUTPUT);
 	  digitalWrite(13, HIGH);
 	  pinMode(2, OUTPUT);
