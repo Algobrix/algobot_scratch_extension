@@ -343,14 +343,6 @@
   
   ext.move_robot = function(robot_direction, num_steps)
   {
-	  pinMode(13, OUTPUT);
-	  digitalWrite(13, HIGH);
-	  pinMode(2, OUTPUT);
-	  pinMode(3, OUTPUT);
-	  pinMode(5, OUTPUT);
-	  pinMode(6, OUTPUT);
-	  pinMode(9, OUTPUT);
-	  pinMode(10, OUTPUT);
 	  if (num_steps === '1')
 	  {
 		  if (robot_direction === 'forward')
@@ -459,14 +451,6 @@
   
   ext.move_motor = function(motor_choice, motor_direction, speed)
   {
-	  pinMode(13, OUTPUT);
-	  digitalWrite(13, HIGH);
-	  pinMode(2, OUTPUT);
-	  pinMode(3, OUTPUT);
-	  pinMode(5, OUTPUT);
-	  pinMode(6, OUTPUT);
-	  pinMode(9, OUTPUT);
-	  pinMode(10, OUTPUT);
 	  if (motor_direction === 'stop')
 	  {
 		  analogWrite(5, 0);
