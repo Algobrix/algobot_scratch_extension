@@ -367,12 +367,6 @@
     device.send(msg.buffer);
   }
   
-  ext.colorLED = function(led, red, green, blue)
-  {
-	register_neopixel(18, 1);
-	neopixel(0, 255, 0, 0);
-  };
-  
   ext.move_robot = function(robot_direction, num_steps)
   {
 	  //add waitTime variable so move robot commands do not overlap
@@ -731,7 +725,6 @@
   
   var blocks = {
     en: [
-	  //[' ', 'set %m.leds to %n red, %n green, and %n blue', 'colorLED', 'led A', 0, 0, 0],
 	  [' ', 'move robot %m.robotDirection %m.robotSteps', 'move_robot', 'forward', '1'],
 	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
       ['h', 'when device is connected', 'whenConnected'],
