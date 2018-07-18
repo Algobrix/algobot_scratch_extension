@@ -27,7 +27,9 @@
     ANALOG_MAPPING_QUERY = 0x69,
     ANALOG_MAPPING_RESPONSE = 0x6A,
     CAPABILITY_QUERY = 0x6B,
-    CAPABILITY_RESPONSE = 0x6C;
+    CAPABILITY_RESPONSE = 0x6C,
+	NEOPIXEL = 0x72,
+	NEOPIXEL_REGISTER = 0x74;
 
   var INPUT = 0x00,
     OUTPUT = 0x01,
@@ -67,7 +69,7 @@
 
   var majorVersion = 0,
     minorVersion = 0;
-	
+
   var connected = false;
   var notifyConnection = false;
   var device = null;
@@ -82,6 +84,30 @@
 
   var hwList = new HWList();
 
+  function register_neopixel(pin, count)
+  {
+	var msg = new Uint8Array([
+		START_SYSEX,
+		NEOPIXEL_REGISTER,
+		pin,
+		count,
+		END_SYSEX]);
+	device.send(msg.buffer);
+  }
+  
+  function neopixel(index, red, green, blue)
+  {
+	var msg = new Uint8Array([
+		START_SYSEX,
+		NEOPIXEL,
+		index,
+		red,
+		green,
+		blue,
+		END_SYSEX]);
+	device.send(msg.buffer);
+  }
+  
   function HWList() {
     this.devices = [];
 
@@ -327,7 +353,7 @@
         digitalOutputData[portNum] >> 0x07]);
     device.send(msg.buffer);
   }
-  
+
   function rotateServo(pin, deg) {
     if (!hasCapability(pin, SERVO)) {
       console.log('ERROR: valid servo pins are ' + pinModes[SERVO].join(', '));
@@ -341,122 +367,126 @@
     device.send(msg.buffer);
   }
   
+  ext.colorLED = function(led_letter, red, green, blue)
+  {
+	/*if (led_letter === 'led A')
+	{
+		register_neopixel(18, 1);
+		neopixel(0, red, green, blue);
+	}
+	else if (led_letter === 'led B')
+	{
+		register_neopixel(19, 1);
+		neopixel(0, red, green, blue);
+	}*/
+	register_neopixel(18, 1);
+	neopixel(0, 0, 255, 0);
+  }
+  
   ext.move_robot = function(robot_direction, num_steps)
   {
-	  //add waitTime variable so move robot commands do not overlap
-	  var waitTime = 0;
 	  if (num_steps === '1')
 	  {
 		  if (robot_direction === 'forward')
 		  {
+			  analogWrite(6, 0);
+			  analogWrite(2, 0);
+			  analogWrite(3, 127);
+			  analogWrite(5, 127);
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
+				  analogWrite(6, 0);
 				  analogWrite(2, 0);
-				  analogWrite(3, 127);
-				  analogWrite(6, 127);
-			  }, waitTime);
-			  waitTime = waitTime + 1500;
+				  analogWrite(3, 0);
+			  }, 1500);
 		  }
 		  else if (robot_direction === 'backward')
 		  {
+			  analogWrite(5, 0);
+			  analogWrite(3, 0);
+			  analogWrite(6, 127);
+			  analogWrite(2, 127);
 			  setTimeout(function()
 			  {
-				  analogWrite(3, 0);
+				  analogWrite(5, 0);
 				  analogWrite(6, 0);
-				  analogWrite(2, 127);
-				  analogWrite(5, 127);
-			  }, waitTime);
-			  waitTime = waitTime + 1500;
+				  analogWrite(2, 0);
+				  analogWrite(3, 0);
+			  }, 1500);
 		  }
 		  else if (robot_direction === 'left')
 		  {
-			  setTimeout(function()
-			  {
-				  analogWrite(2, 0);
-				  analogWrite(6, 0);
-				  analogWrite(5, 85);
-				  analogWrite(3, 85);
-			  }, 2300);
-			  waitTime = waitTime + 2300;
+			  analogWrite(6, 0);
+			  analogWrite(3, 0);
+			  analogWrite(5, 127);
+			  analogWrite(2, 127);
 		  }
 		  else if (robot_direction === 'right')
 		  {
-			  setTimeout(function()
-			  {
-				  analogWrite(5, 0);
-				  analogWrite(3, 0);
-				  analogWrite(2, 85);
-				  analogWrite(6, 85);
-			  }, waitTime);
-			  waitTime = waitTime + 2300;
+			  analogWrite(5, 0);
+			  analogWrite(2, 0);
+			  analogWrite(6, 127);
+			  analogWrite(3, 127);
 		  }
 		  else
 		  {
-			  setTimeout(function()
-			  {
-				  analogWrite(5, 0);
-				  analogWrite(6, 0);
-				  analogWrite(2, 0);
-				  analogWrite(3, 0);
-			  }, waitTime);
+			  analogWrite(5, 0);
+			  analogWrite(6, 0);
+			  analogWrite(2, 0);
+			  analogWrite(3, 0);
 		  }
 	  }
 	  else
 	  {
 		  if (robot_direction === 'forward')
 		  {
+			  analogWrite(6, 0);
+			  analogWrite(2, 0);
+			  analogWrite(3, 127);
+			  analogWrite(5, 127);
 			  setTimeout(function()
 			  {
 				  analogWrite(5, 0);
+				  analogWrite(6, 0);
 				  analogWrite(2, 0);
-				  analogWrite(3, 127);
-				  analogWrite(6, 127);
-			  }, waitTime);
-			  waitTime = waitTime + 3000;
+				  analogWrite(3, 0);
+			  }, 3000);
 		  }
 		  else if (robot_direction === 'backward')
 		  {
+			  analogWrite(5, 0);
+			  analogWrite(3, 0);
+			  analogWrite(6, 127);
+			  analogWrite(2, 127);
 			  setTimeout(function()
 			  {
-				  analogWrite(3, 0);
+				  analogWrite(5, 0);
 				  analogWrite(6, 0);
-				  analogWrite(2, 127);
-				  analogWrite(5, 127);
-			  }, waitTime);
-			  waitTime = waitTime + 3000;
+				  analogWrite(2, 0);
+				  analogWrite(3, 0);
+			  }, 3000);
 		  }
 		  else if (robot_direction === 'left')
 		  {
-			  setTimeout(function()
-			  {
-				  analogWrite(2, 0);
-				  analogWrite(6, 0);
-				  analogWrite(5, 85);
-				  analogWrite(3, 85);
-			  }, 2300);
-			  waitTime = waitTime + 2300;
+			  analogWrite(6, 0);
+			  analogWrite(3, 0);
+			  analogWrite(5, 127);
+			  analogWrite(2, 127);
 		  }
 		  else if (robot_direction === 'right')
 		  {
-			  setTimeout(function()
-			  {
-				  analogWrite(5, 0);
-				  analogWrite(3, 0);
-				  analogWrite(2, 85);
-				  analogWrite(6, 85);
-			  }, waitTime);
-			  waitTime = waitTime + 2300;
+			  analogWrite(5, 0);
+			  analogWrite(2, 0);
+			  analogWrite(6, 127);
+			  analogWrite(3, 127);
 		  }
 		  else
 		  {
-			  setTimeout(function()
-			  {
-				  analogWrite(5, 0);
-				  analogWrite(6, 0);
-				  analogWrite(2, 0);
-				  analogWrite(3, 0);
-			  }, waitTime);
+			  analogWrite(5, 0);
+			  analogWrite(6, 0);
+			  analogWrite(2, 0);
+			  analogWrite(3, 0);
 		  }
 	  }
   };
@@ -515,6 +545,7 @@
 		  }
 	  }
   };
+	  
   
   ext.whenConnected = function() {
     if (notifyConnection) return true;
@@ -699,6 +730,7 @@
   
   var blocks = {
     en: [
+	  [' ', 'set %m.leds to %n red, %n green, and %n blue', 'colorLED', 'led A', 0, 0, 0],
 	  [' ', 'move robot %m.robotDirection %m.robotSteps', 'move_robot', 'forward', '1'],
 	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
       ['h', 'when device is connected', 'whenConnected'],
@@ -735,6 +767,9 @@
       [' ', 'Setze %m.leds Helligkeit auf %n%', 'setLED', 'LED A', 100],
       [' ', 'Ändere %m.leds Helligkeit um %n%', 'changeLED', 'LED A', 20],
       ['-'],
+      [' ', 'Drehe %m.servos auf %n Grad', 'rotateServo', 'Servo A', 180],
+      [' ', 'Drehe %m.servos um %n Grad', 'changeServo', 'Servo A', 20],
+      ['-'],
       ['h', 'Wenn %m.buttons ist %m.btnStates', 'whenButton', 'Taste A', 'gedrückt'],
       ['b', '%m.buttons gedrückt?', 'isButtonPressed', 'Taste A'],
       ['-'],
@@ -760,6 +795,9 @@
       [' ', 'Régler %m.leds LED %m.output Sortie', 'digitalLED', 'LED A', 'ON'],
       [' ', 'Régler %m.leds Luminosité de la LED à %n%', 'setLED', 'LED A', 100],
       [' ', 'Changer %m.leds Luminosité de la LED de %n%', 'changeLED', 'LED A', 20],
+      ['-'],
+      [' ', 'Tourner %m.servos Servo Moteur à %n degrés', 'rotateServo', 'Servo Moteur A', 180],
+      [' ', 'Tourner %m.servos Servo Moteur de %n degrés', 'changeServo', 'Servo Moteur A', 20],
       ['-'],
       ['h', 'Quand %m.buttons Bouton est %m.btnStates', 'whenButton', 'Bouton A', 'Appuyé'],
       ['b', 'Le %m.buttons est-il pressé?', 'isButtonPressed', 'Bouton A'],
@@ -787,6 +825,9 @@
       [' ', 'porta luminosità di %m.leds a %n%', 'setLED', 'led A', 100],
       [' ', 'cambia luminosità di %m.leds a %n%', 'changeLED', 'led A', 20],
       ['-'],
+      [' ', 'ruota %m.servos fino a %n gradi', 'rotateServo', 'servo A', 180],
+      [' ', 'ruota %m.servos di %n gradi', 'changeServo', 'servo A', 20],
+      ['-'],
       ['h', 'quando tasto %m.buttons è %m.btnStates', 'whenButton', 'pulsante A', 'premuto'],
       ['b', '%m.buttons premuto?', 'isButtonPressed', 'pulsante A'],
       ['-'],
@@ -812,6 +853,9 @@
       [' ', '%m.leds を %m.outputs にする', 'digitalLED', 'led A', 'on'],
       [' ', '%m.leds の明るさを %n% にする', 'setLED', 'led A', 100],
       [' ', '%m.leds の明るさを %n% ずつ変える', 'changeLED', 'led A', 20],
+      ['-'],
+      [' ', '%m.servos を %n 度へ向ける', 'rotateServo', 'servo A', 180],
+      [' ', '%m.servos を %n 度ずつ回す', 'changeServo', 'servo A', 20],
       ['-'],
       ['h', '%m.buttons が %m.btnStates とき', 'whenButton', 'ボタン A', '押された'],
       ['b', '%m.buttons 押された', 'isButtonPressed', 'ボタン A'],
@@ -839,6 +883,9 @@
       [' ', '%m.leds 의 밝기를 %n% 로 설정하기', 'setLED', 'led A', 100],
       [' ', '%m.leds 의 밝기를 %n% 만큼 바꾸기', 'changeLED', 'led A', 20],
       ['-'],
+      [' ', '%m.servos 를 %n 도로 회전하기', 'rotateServo', '서보모터 A', 180],
+      [' ', '%m.servos 를 %n 도 만큼 회전하기', 'changeServo', '서보모터 A', 20],
+      ['-'],
       ['h', '%m.buttons 의 상태가 %m.btnStates 일 때', 'whenButton', '버튼 A', '눌림'],
       ['b', '%m.buttons 가 눌려져 있는가?', 'isButtonPressed', '버튼 A'],
       ['-'],
@@ -864,6 +911,9 @@
       [' ', 'sett %m.leds %m.outputs', 'digitalLED', 'LED A', 'på'],
       [' ', 'sett %m.leds styrke til %n%', 'setLED', 'LED A', 100],
       [' ', 'endre %m.leds styrke med %n%', 'changeLED', 'LED A', 20],
+      ['-'],
+      [' ', 'rotér %m.servos til %n grader', 'rotateServo', 'servo A', 180],
+      [' ', 'rotér %m.servos med %n grader', 'changeServo', 'servo A', 20],
       ['-'],
       ['h', 'når %m.buttons %m.btnStates', 'whenButton', 'knapp A', 'trykkes'],
       ['b', '%m.buttons trykket?', 'isButtonPressed', 'knapp A'],
@@ -891,6 +941,9 @@
       [' ', 'schakel %m.leds helderheid tot %n%', 'setLED', 'led A', 100],
       [' ', 'verander %m.leds helderheid met %n%', 'changeLED', 'led A', 20],
       ['-'],
+      [' ', 'draai %m.servos tot %n graden', 'rotateServo', 'servo A', 180],
+      [' ', 'draai %m.servos met %n graden', 'changeServo', 'servo A', 20],
+      ['-'],
       ['h', 'wanneer %m.buttons is %m.btnStates', 'whenButton', 'knop A', 'in gedrukt'],
       ['b', '%m.buttons ingedrukt?', 'isButtonPressed', 'knop A'],
       ['-'],
@@ -916,6 +969,9 @@
       [' ', 'ustaw %m.leds na %m.outputs', 'digitalLED', 'led A', 'włączony'],
       [' ', 'ustaw jasność %m.leds na %n%', 'setLED', 'led A', 100],
       [' ', 'zmień jasność %m.leds o %n%', 'changeLED', 'led A', 20],
+      ['-'],
+      [' ', 'obróć %m.servos w położenie %n degrees', 'rotateServo', 'serwo A', 180],
+      [' ', 'obróć %m.servos o %n degrees', 'changeServo', 'serwo A', 20],
       ['-'],
       ['h', 'kiedy %m.buttons jest %m.btnStates', 'whenButton', 'przycisk A', 'wciśnięty'],
       ['b', 'czy %m.buttons jest wciśnięty?', 'isButtonPressed', 'przycisk A'],
@@ -943,6 +999,9 @@
       [' ', 'estado %m.leds brilho to %n%', 'setLED', 'led A', 100],
       [' ', 'mudar %m.leds brilho em %n%', 'changeLED', 'led A', 20],
       ['-'],
+      [' ', 'girar %m.servos para %n graus', 'rotateServo', 'servo A', 180],
+      [' ', 'girar %m.servos em %n graus', 'changeServo', 'servo A', 20],
+      ['-'],
       ['h', 'quando %m.buttons is %m.btnStates', 'whenButton', 'botao A', 'pressionado'],
       ['b', '%m.buttons pressionado?', 'isButtonPressed', 'botao A'],
       ['-'],
@@ -968,6 +1027,9 @@
       [' ', 'установить %m.leds в %m.outputs', 'digitalLED', 'светодиод A', 'включен'],
       [' ', 'установить яркость %m.leds в %n%', 'setLED', 'светодиод A', 100],
       [' ', 'изменить яркость %m.leds на %n%', 'changeLED', 'светодиод A', 20],
+      ['-'],
+      [' ', 'установить %m.servos в позицию %n °', 'rotateServo', 'серво A', 180],
+      [' ', 'повернуть %m.servos на %n °', 'changeServo', 'серво A', 20],
       ['-'],
       ['h', 'когда %m.buttons %m.btnStates', 'whenButton', 'кнопка A', 'нажата'],
       ['b', '%m.buttons нажата?', 'isButtonPressed', 'кнопка A'],
@@ -995,6 +1057,9 @@
       [' ', 'όρισε στο %m.leds τη φωτεινότητα ίση με %n%', 'setLED', 'led A', 100],
       [' ', 'άλλαξε στο %m.leds τη φωτεινότητα κατά %n%', 'changeLED', 'led A', 20],
       ['-'],
+      [' ', 'στρίψε το %m.servos στις %n μοίρες', 'rotateServo', 'servo A', 180],
+      [' ', 'στρίψε το %m.servos κατά %n μοίρες', 'changeServo', 'servo A', 20],
+      ['-'],
       ['h', 'Όταν το %m.buttons είναι %m.btnStates', 'whenButton', 'κουμπί A', 'πατημένο'],
       ['b', 'το %m.buttons πατήθηκε;', 'isButtonPressed', 'κουμπί A'],
       ['-'],
@@ -1021,6 +1086,9 @@
       [' ', 'fijar brillo de %m.leds a %n%', 'setLED', 'led A', 100],
       [' ', 'cambiar brillo de %m.leds por %n%', 'changeLED', 'led A', 20],
       ['-'],
+      [' ', 'apuntar %m.servos en dirección %n grados', 'rotateServo', 'servo A', 180],
+      [' ', 'girar %m.servos %n grados', 'changeServo', 'servo A', 20],
+      ['-'],
       ['h', 'cuando el %m.buttons esté %m.btnStates', 'whenButton', 'botón A', 'presionado'],
       ['b', '¿%m.buttons presionado?', 'isButtonPressed', 'botón A'],
       ['-'],
@@ -1046,6 +1114,9 @@
       [' ', '設定 %m.leds %m.outputs', 'digitalLED', '發光二極體 A', 'on'],
       [' ', '設定 %m.leds 亮度為 %n%', 'setLED', '發光二極體 A', 100],
       [' ', '改變 %m.leds 亮度 %n%', 'changeLED', '發光二極體 A', 20],
+      ['-'],
+      [' ', '旋轉 %m.servos 到 %n 度', 'rotateServo', '伺服馬達 A', 180],
+      [' ', '旋轉 %m.servos %n 度', 'changeServo', '伺服馬達 A', 20],
       ['-'],
       ['h', '當 %m.buttons 為 %m.btnStates', 'whenButton', '按鈕 A', '按下'],
       ['b', '%m.buttons 按下?', 'isButtonPressed', '按鈕 A'],
@@ -1078,7 +1149,7 @@
       hwOut: ['led A', 'led B', 'led C', 'led D', 'button A', 'button B', 'button C', 'button D', 'servo A', 'servo B', 'servo C', 'servo D'],
       leds: ['led A', 'led B', 'led C', 'led D'],
       outputs: ['on', 'off'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
     },
     de: {
       buttons: ['Taste A', 'Taste B', 'Taste C', 'Taste D'],
@@ -1087,7 +1158,8 @@
       hwOut: ['LED A', 'LED B', 'LED C', 'LED D', 'Taste A', 'Taste B', 'Taste C', 'Taste D', 'Servo A', 'Servo B', 'Servo C', 'Servo D'],
       leds: ['LED A', 'LED B', 'LED C', 'LED D'],
       outputs: ['Ein', 'Aus'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
+      servos: ['Servo A', 'Servo B', 'Servo C', 'Servo D']
     },
     fr: {
       buttons: ['Bouton A', 'Bouton B', 'Bouton C', 'Bouton D'],
@@ -1096,7 +1168,8 @@
       hwOut: ['LED A', 'LED B', 'LED C', 'LED D', 'Bouton A', 'Bouton B', 'Bouton C', 'Bouton D', 'Servo Moteur A', 'Servo Moteur B', 'Servo Moteur C', 'Servo Moteur D'],
       leds: ['LED A', 'LED B', 'LED C', 'LED D'],
       outputs: ['ON', 'OFF'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
+      servos: ['Servo Moteur A', 'Servo Moteur B', 'Servo Moteur C', 'Servo Moteur D']
     },
     it: {
       buttons: ['pulsante A', 'pulsante B', 'pulsante C', 'pulsante D'],
@@ -1105,7 +1178,8 @@
       hwOut: ['led A', 'led B', 'led C', 'led D', 'pulsante A', 'pulsante B', 'pulsante C', 'pulsante D', 'servo A', 'servo B', 'servo C', 'servo D'],
       leds: ['led A', 'led B', 'led C', 'led D'],
       outputs: ['acceso', 'spento'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
+      servos: ['servo A', 'servo B', 'servo C', 'servo D']
     },
     ja: {
       buttons: ['ボタン A', 'ボタン B', 'ボタン C', 'ボタン D'],
@@ -1114,7 +1188,8 @@
       hwOut: ['led A', 'led B', 'led C', 'led D', 'ボタン A', 'ボタン B', 'ボタン C', 'ボタン D', 'サーボ A', 'サーボ B', 'サーボ C', 'サーボ D'],
       leds: ['led A', 'led B', 'led C', 'led D'],
       outputs: ['オン', 'オフ'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
+      servos: ['サーボ A', 'サーボ B', 'サーボ C', 'サーボ D']
     },
     ko: {
       buttons: ['버튼 A', '버튼 B', '버튼 C', '버튼 D'],
@@ -1123,7 +1198,8 @@
       hwOut: ['led A', 'led B', 'led C', 'led D', '버튼 A', '버튼 B', '버튼 C', '버튼 D', '서보모터 A', '서보모터 B', '서보모터 C', '서보모터 D'],
       leds: ['led A', 'led B', 'led C', 'led D'],
       outputs: ['켜기', '끄기'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
+      servos: ['서보모터 A', '서보모터 B', '서보모터 C', '서보모터 D']
     },
     nb: {
       buttons: ['knapp A', 'knapp B', 'knapp C', 'knapp D'],
@@ -1132,7 +1208,8 @@
       hwOut: ['LED A', 'LED B', 'LED C', 'LED D', 'knapp A', 'knapp B', 'knapp C', 'knapp D', 'servo A', 'servo B', 'servo C', 'servo D'],
       leds: ['LED A', 'LED B', 'LED C', 'LED D'],
       outputs: ['på', 'av'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
+      servos: ['servo A', 'servo B', 'servo C', 'servo D']
     },
     nl: {
       buttons: ['knop A', 'knop B', 'knop C', 'knop D'],
@@ -1141,7 +1218,8 @@
       hwOut: ['led A', 'led B', 'led C', 'led D', 'knop A', 'knop B', 'knop C', 'knop D', 'servo A', 'servo B', 'servo C', 'servo D'],
       leds: ['led A', 'led B', 'led C', 'led D'],
       outputs: ['aan', 'uit'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
+      servos: ['servo A', 'servo B', 'servo C', 'servo D']
     },
     pl: {
       buttons: ['przycisk A', 'przycisk B', 'przycisk C', 'przycisk D'],
@@ -1150,7 +1228,8 @@
       hwOut: ['led A', 'led B', 'led C', 'led D', 'przycisk A', 'przycisk B', 'przycisk C', 'przycisk D', 'serwo A', 'serwo B', 'serwo C', 'serwo D'],
       leds: ['led A', 'led B', 'led C', 'led D'],
       outputs: ['włączony', 'wyłączony'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
+      servos: ['serwo A', 'serwo B', 'serwo C', 'serwo D']
     },
     pt: {
       buttons: ['botao A', 'botao B', 'botao C', 'botao D'],
@@ -1159,7 +1238,8 @@
       hwOut: ['led A', 'led B', 'led C', 'led D', 'botao A', 'botao B', 'botao C', 'botao D', 'servo A', 'servo B', 'servo C', 'servo D'],
       leds: ['led A', 'led B', 'led C', 'led D'],
       outputs: ['ligado', 'desligado'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
+      servos: ['servo A', 'servo B', 'servo C', 'servo D']
     },
     ru: {
       buttons: ['кнопка A', 'кнопка B', 'кнопка C', 'кнопка D'],
@@ -1168,7 +1248,8 @@
       hwOut: ['светодиод A', 'светодиод B', 'светодиод C', 'светодиод D', 'кнопка A', 'кнопка B', 'кнопка C', 'кнопка D', 'серво A', 'серво B', 'серво C', 'серво D'],
       leds: ['светодиод A', 'светодиод B', 'светодиод C', 'светодиод D'],
       outputs: ['включен', 'выключен'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
+      servos: ['серво A', 'серво B', 'серво C', 'серво D']
     },
     el: {
       buttons: ['κουμπί A', 'κουμπί B', 'κουμπί C', 'κουμπί D'],
@@ -1177,7 +1258,8 @@
       hwOut: ['led A', 'led B', 'led C', 'led D', 'κουμπί A', 'κουμπί B', 'κουμπί C', 'κουμπί D', 'servo A', 'servo B', 'servo C', 'servo D'],
       leds: ['led A', 'led B', 'led C', 'led D'],
       outputs: ['ενεργοποιημένο', 'απενεργοποιημένο'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
+      servos: ['servo A', 'servo B', 'servo C', 'servo D']
     },
     es: {
       buttons: ['botón A', 'botón B', 'botón C', 'botón D'],
@@ -1186,7 +1268,8 @@
       hwOut: ['led A', 'led B', 'led C', 'led D', 'botón A', 'botón B', 'botón C', 'botón D', 'servo A', 'servo B', 'servo C', 'servo D'],
       leds: ['led A', 'led B', 'led C', 'led D'],
       outputs: ['on', 'off'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
+      servos: ['servo A', 'servo B', 'servo C', 'servo D']
     },
     zh: {
       buttons: ['按鈕 A', '按鈕 B', '按鈕 C', '按鈕 D'],
@@ -1195,16 +1278,17 @@
       hwOut: ['發光二極體 A', '發光二極體 B', '發光二極體 C', '發光二極體 D', '按鈕 A', '按鈕 B', '按鈕 C', '按鈕 D', '伺服馬達 A', '伺服馬達 B', '伺服馬達 C', '伺服馬達 D'],
       leds: ['發光二極體 A', '發光二極體 B', '發光二極體 C', '發光二極體 D'],
       outputs: ['開', '關'],
-      ops: ['>', '=', '<']
+      ops: ['>', '=', '<'],
+      servos: ['伺服馬達 A', '伺服馬達 B', '伺服馬達 C', '伺服馬達 D']
     }
   };
 
   var descriptor = {
     blocks: blocks[lang],
     menus: menus[lang],
-    url: 'http://algobrix.github.io/algobot_scratch_extension/algobot_extension.js'
+    url: 'http://algobrix.github.io/algobot_scratch_extension/ardino_extension.js'
   };
 
-  ScratchExtensions.register('Algobot', descriptor, ext, {type:'serial'});
+  ScratchExtensions.register('Arduino', descriptor, ext, {type:'serial'});
 
 })({});
