@@ -596,7 +596,7 @@
     var hw = hwList.search(led);
     if (!hw) return;
     analogWrite(hw.pin, val);
-    hw.val = val;
+    hw.val = val; 
   };
 
   ext.changeLED = function(led, val) {
