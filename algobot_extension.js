@@ -735,7 +735,7 @@
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
       [' ', 'connect %m.hwIn to analog %n', 'connectHW', 'rotation knob', 0],
       ['-'],
-      [' ', 'set %m.leds %n red, %n green, and %n blue', 'digitalLED', 'led A', 0, 0, 0],
+      [' ', 'set %m.leds to %n red, %n green, and %n blue', 'digitalLED', 'led A', 0, 0, 0],
       [' ', 'set %m.leds brightness to %n%', 'setLED', 'led A', 100],
       [' ', 'change %m.leds brightness by %n%', 'changeLED', 'led A', 20],
       ['-'],
