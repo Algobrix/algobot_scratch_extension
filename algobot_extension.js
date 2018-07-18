@@ -367,6 +367,12 @@
     device.send(msg.buffer);
   }
   
+  ext.colorLED = function(led, red, green, blue)
+  {
+	register_neopixel(18, 1);
+	neopixel(0, 255, 0, 0);
+  }
+  
   ext.move_robot = function(robot_direction, num_steps)
   {
 	  //add waitTime variable so move robot commands do not overlap
@@ -541,7 +547,6 @@
 		  }
 	  }
   };
-	  
   
   ext.whenConnected = function() {
     if (notifyConnection) return true;
@@ -593,14 +598,11 @@
     hwList.add(hw, pin);
   };
 
-  ext.setLED = function(led, red, green, blue) {
-    /*var hw = hwList.search(led);
+  ext.setLED = function(led, val) {
+    var hw = hwList.search(led);
     if (!hw) return;
     analogWrite(hw.pin, val);
-    hw.val = val; */
-	register_neopixel(18, 1);
-	neopixel(0, 255, 0, 0);
-	
+    hw.val = val;
   };
 
   ext.changeLED = function(led, val) {
@@ -729,13 +731,14 @@
   
   var blocks = {
     en: [
+	  [' ', 'set %m.leds to %n red, %n green, and %n blue', 'colorLED', 'led A', 0, 0, 0],
 	  [' ', 'move robot %m.robotDirection %m.robotSteps', 'move_robot', 'forward', '1'],
 	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
       ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
       [' ', 'connect %m.hwIn to analog %n', 'connectHW', 'rotation knob', 0],
       ['-'],
-      [' ', 'set %m.leds to %n red, %n green, and %n blue', 'digitalLED', 'led A', 0, 0, 0],
+      [' ', 'set %m.leds %m.outputs', 'digitalLED', 'led A', 'on'],
       [' ', 'set %m.leds brightness to %n%', 'setLED', 'led A', 100],
       [' ', 'change %m.leds brightness by %n%', 'changeLED', 'led A', 20],
       ['-'],
