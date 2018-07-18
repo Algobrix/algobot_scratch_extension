@@ -28,8 +28,6 @@
     ANALOG_MAPPING_RESPONSE = 0x6A,
     CAPABILITY_QUERY = 0x6B,
     CAPABILITY_RESPONSE = 0x6C,
-	NEOPIXEL = 0x72,
-	NEOPIXEL_REGISTER = 0x74;
 
   var INPUT = 0x00,
     OUTPUT = 0x01,
@@ -329,30 +327,6 @@
         digitalOutputData[portNum] >> 0x07]);
     device.send(msg.buffer);
   }
-
-  function register_neopixel(pin, count)
-  {
-	var msg = new Uint8Array([
-		START_SYSEX
-		NEOPIXEL_REGISTER,
-		pin,
-		count,
-		END_SYSEX]);
-	device.send(msg.buffer);
-  }
-  
-  function neopixel(index, red, green, blue)
-  {
-	var msg = new Uint8Array([
-		START_SYSEX
-		NEOPIXEL,
-		index,
-		red,
-		green,
-		blue,
-		END_SYSEX]);
-	device.send(msg.buffer);
-  }
   
   function rotateServo(pin, deg) {
     if (!hasCapability(pin, SERVO)) {
@@ -596,7 +570,7 @@
     var hw = hwList.search(led);
     if (!hw) return;
     analogWrite(hw.pin, val);
-    hw.val = val; 
+    hw.val = val;
   };
 
   ext.changeLED = function(led, val) {
