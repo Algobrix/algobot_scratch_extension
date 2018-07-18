@@ -371,7 +371,7 @@
   {
 	register_neopixel(18, 1);
 	neopixel(0, 255, 0, 0);
-  }
+  };
   
   ext.move_robot = function(robot_direction, num_steps)
   {
