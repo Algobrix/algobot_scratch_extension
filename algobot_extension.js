@@ -330,6 +330,30 @@
     device.send(msg.buffer);
   }
 
+  function register_neopixel(pin, count)
+  {
+	var msg = new Uint8Array([
+		START_SYSEX
+		NEOPIXEL_REGISTER,
+		pin,
+		count,
+		END_SYSEX]);
+	device.send(msg.buffer);
+  }
+  
+  function neopixel(index, red, green, blue)
+  {
+	var msg = new Uint8Array([
+		START_SYSEX
+		NEOPIXEL,
+		index,
+		red,
+		green,
+		blue,
+		END_SYSEX]);
+	device.send(msg.buffer);
+  }
+  
   function rotateServo(pin, deg) {
     if (!hasCapability(pin, SERVO)) {
       console.log('ERROR: valid servo pins are ' + pinModes[SERVO].join(', '));
