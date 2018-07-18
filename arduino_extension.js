@@ -376,7 +376,7 @@
 	}
 	else if (led_letter === 'led B')
 	{
-		register neopixel(19, 1);
+		register_neopixel(19, 1);
 		neopixel(0, red, green, blue);
 	}
   }
