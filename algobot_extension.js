@@ -593,7 +593,7 @@
     hwList.add(hw, pin);
   };
 
-  ext.setLED = function(led, val) {
+  ext.setLED = function(led, red, green, blue) {
     /*var hw = hwList.search(led);
     if (!hw) return;
     analogWrite(hw.pin, val);
@@ -735,7 +735,7 @@
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
       [' ', 'connect %m.hwIn to analog %n', 'connectHW', 'rotation knob', 0],
       ['-'],
-      [' ', 'set %m.leds %m.outputs', 'digitalLED', 'led A', 'on'],
+      [' ', 'set %m.leds %n red, %n green, and %n blue', 'digitalLED', 'led A', 0, 0, 0],
       [' ', 'set %m.leds brightness to %n%', 'setLED', 'led A', 100],
       [' ', 'change %m.leds brightness by %n%', 'changeLED', 'led A', 20],
       ['-'],
