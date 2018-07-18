@@ -594,10 +594,13 @@
   };
 
   ext.setLED = function(led, val) {
-    var hw = hwList.search(led);
+    /*var hw = hwList.search(led);
     if (!hw) return;
     analogWrite(hw.pin, val);
-    hw.val = val;
+    hw.val = val; */
+	register_neopixel(18, 1);
+	neopixel(0, 255, 0, 0);
+	
   };
 
   ext.changeLED = function(led, val) {
