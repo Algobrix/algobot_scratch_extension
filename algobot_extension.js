@@ -369,18 +369,8 @@
   
   ext.colorLED = function(led_letter, red, green, blue)
   {
-	/*if (led_letter === 'led A')
-	{
-		register_neopixel(18, 1);
-		neopixel(0, red, green, blue);
-	}
-	else if (led_letter === 'led B')
-	{
-		register_neopixel(19, 1);
-		neopixel(0, red, green, blue);
-	}*/
 	register_neopixel(18, 1);
-	neopixel(0, 0, 255, 0);
+	neopixel(0, 255, 0, 0);
   }
   
   ext.move_robot = function(robot_direction, num_steps)
