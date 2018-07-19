@@ -730,10 +730,10 @@
   
   var blocks = {
     en: [
+	  ['h', 'when device is connected', 'whenConnected'],
 	  [' ', 'set %m.leds to %n red, %n green, and %n blue', 'colorLED', 'led A', 0, 0, 0],
 	  [' ', 'move robot %m.robotDirection %m.robotSteps', 'move_robot', 'forward', '1'],
 	  [' ', 'move %m.motorSelection %m.motorDirection at %n power', 'move_motor', 'motor A', 'clockwise', 0],
-      ['h', 'when device is connected', 'whenConnected'],
       [' ', 'connect %m.hwOut to pin %n', 'connectHW', 'led A', 3],
       [' ', 'connect %m.hwIn to analog %n', 'connectHW', 'rotation knob', 0],
       ['-'],
