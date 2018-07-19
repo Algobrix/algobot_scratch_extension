@@ -369,8 +369,18 @@
   
   ext.colorLED = function(led_letter, red, green, blue)
   {
-	register_neopixel(18, 1);
-	neopixel(0, 255, 0, 0);
+	/*register_neopixel(18, 1);
+	neopixel(0, 255, 0, 0); */
+	if (led_letter === 'led A')
+	{
+		register_neopixel(18, 1);
+	}
+	else
+	{
+		register_neopixel(19, 1);
+	}
+	neopixel(0, red, green, blue);
+	
   }
   
   ext.move_robot = function(robot_direction, num_steps)
@@ -1276,9 +1286,9 @@
   var descriptor = {
     blocks: blocks[lang],
     menus: menus[lang],
-    url: 'http://algobrix.github.io/algobot_scratch_extension/ardino_extension.js'
+    url: 'http://algobrix.github.io/algobot_scratch_extension/algobot_extension.js'
   };
 
-  ScratchExtensions.register('Arduino', descriptor, ext, {type:'serial'});
+  ScratchExtensions.register('Algobot', descriptor, ext, {type:'serial'});
 
 })({});
